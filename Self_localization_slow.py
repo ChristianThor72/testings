@@ -8,6 +8,7 @@ import math
 from random import gauss, choices
 from urllib.robotparser import RobotFileParser
 import random
+import copy
 import cv2
 import particle
 import numpy as np
@@ -131,7 +132,10 @@ def initialize_particles(num_particles):
     return particles
 
 def resample_particles(particles, weights):
-    return random.choices(particles, weights, k = len(particles))
+    temp = random.choices(particles, weights, k = len(particles))
+    for i in range(len(temp)):
+        particles[i] = copy.copy(temp[i])
+    return particles
 
 def draw_aruco_objects(ids, img, corners, intrinsic_matrix, distortion_coeffs, rvecs, tvecs, arucoMarkerLength):
     """Draws detected objects and their orientations on the image given in img."""
@@ -238,7 +242,7 @@ def self_locate(cam, frameReference, init_poses = []):
                 
                 print("ny omgang ")
                 sigma = 5
-                sigma_theta = 0.1
+                sigma_theta = 0.05
                 sum_of_weights = 0
                 #print(objectIDs[0])
                 box_x = landmarks[int(objectIDs[0])][0] #x koordinat for kassen der er observeret
