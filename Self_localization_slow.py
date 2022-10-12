@@ -192,7 +192,7 @@ def self_locate(cam, frameReference, init_poses = []):
             cam = camera.Camera(0, 'macbookpro', useCaptureThread = True)
         """
         count = 0 
-        while count < 3:
+        while count < 10:
             # Move the robot according to user input (only for testing)
             action = cv2.waitKey(10)
             if action == ord('q'): # Quit
@@ -225,7 +225,7 @@ def self_locate(cam, frameReference, init_poses = []):
             # Detect objects
             frameReference = cam.get_next_frame()
             objectIDs, dists, angles = cam.detect_aruco_objects(frameReference)
-            sleep(1)            
+            sleep(0.2)            
             if not isinstance(objectIDs, type(None)):
                 count += 1
                 # List detected objects
@@ -238,7 +238,7 @@ def self_locate(cam, frameReference, init_poses = []):
                 
                 print("ny omgang ")
                 sigma = 5
-                sigma_theta = 0.3
+                sigma_theta = 0.1
                 sum_of_weights = 0
                 #print(objectIDs[0])
                 box_x = landmarks[int(objectIDs[0])][0] #x koordinat for kassen der er observeret
@@ -283,7 +283,7 @@ def self_locate(cam, frameReference, init_poses = []):
                 # XXX: You do thisQQQQQQ
                 print("resampling....")
                 particles = resample_particles(particles, probabilities)
-                time.sleep(1)
+                time.sleep(0.5)
 
                 
                 #adding noise
@@ -295,7 +295,7 @@ def self_locate(cam, frameReference, init_poses = []):
                 for p in particles:
                     p.setWeight(1.0/num_particles)
             
-            particle.add_uncertainty(particles, 0.1, 0.01)
+            particle.add_uncertainty(particles, 0.1, 0.001)
         
             est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
     
