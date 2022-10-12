@@ -13,6 +13,9 @@ arlo = robot.Robot()
 cam = Camera(0, robottype = 'arlo', useCaptureThread = True)
 sleep(1)
 
+NUM_PARTICLES = 5000
+particles = sls.initialize_particles(NUM_PARTICLES)
+
 #Defining the aruco dict
 arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_6X6_250)
 dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
@@ -42,6 +45,7 @@ def find_pose():
         #Scanning for object
         if not corners or ids in id_lst:
             actions.scan_for_object(cam, dict)
+            move_particle(particles, 0,0, -0.349)
             sleep(1)
         
         # Checking if any object found
@@ -55,10 +59,10 @@ def find_pose():
                     id_lst.append(ids)
                     
                     #Calling selflocate to get some poses ready for when second object is found
-                    _, _, _, parties = sls.self_locate(cam, frameReference)
+                    _, _, _, parties = sls.self_locate(cam, frameReference, particles)
                     # Saving poses
-                    parties_lst.append(parties)
-                    
+                    #parties_lst.append(parties)
+                    particles = parties
                     
             # If the object found is not the first obejct found, then use this.            
             elif len(id_lst) == 1:
@@ -68,7 +72,7 @@ def find_pose():
                     id_lst.append(ids)
                     
                     #Using poses from when we saw the object before. Now we should have a good pose.
-                    theta, x, y, parties = sls.self_locate(cam, frameReference, parties_lst[0])  
+                    theta, x, y, parties = sls.self_locate(cam, frameReference, particles)  
                     pose = [x, y, theta]
     
     # Return the best estimated pose
@@ -85,6 +89,7 @@ sign, theta = np.sign(theta_corr), np.abs(theta_corr)
 
 #Make the robot turn towards middle
 actions.turn_degrees(theta, sign)
+move_particle(particles, 0,0, theta_corr) #eventuel fortegnsfejl
 #Make the robot drive into the middle. The unit for dist should be in mm. Think the output for driving strat might be in meters.. :/
 actions.forward_mm(dist)
 
