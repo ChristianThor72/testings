@@ -295,7 +295,7 @@ def self_locate(cam, frameReference, init_poses = []):
                 for p in particles:
                     p.setWeight(1.0/num_particles)
             
-            particle.add_uncertainty(particles, 0.1, 0.001)
+            particle.add_uncertainty(particles, 0.1, 0.01)
         
             est_pose = particle.estimate_pose(particles) # The estimate of the robots current pose
     
