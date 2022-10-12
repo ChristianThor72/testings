@@ -47,6 +47,7 @@ def find_pose(particles):
         if not corners or ids in id_lst:
             actions.scan_for_object(cam, dict)
             move_particle(particles, 0,0, -0.349)
+            particle.add_uncertainty(particles, 0.0, 0.05)
             sleep(0.5)
         
         # Checking if any object found
