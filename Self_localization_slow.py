@@ -280,7 +280,7 @@ def self_locate(cam, frameReference, init_poses = []):
                 cam.draw_aruco_objects(frameReference)
                 
                 # Resampling
-                # XXX: You do thisQQQQQQ
+                # XXX: You do this
                 print("resampling....")
                 particles = resample_particles(particles, probabilities)
                 time.sleep(0.5)
