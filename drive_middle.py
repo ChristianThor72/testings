@@ -41,7 +41,7 @@ def find_pose():
         
         #Scanning for object
         if not corners or ids in id_lst:
-            actions.scan_for_object(dict)
+            actions.scan_for_object(cam, dict)
             sleep(1)
         
         # Checking if any object found
