@@ -119,10 +119,10 @@ class Camera(object):
             #       7.0564929862291285e+02, 2.5634470978315028e+02, 0., 0., 1. ], dtype = np.float64)
             #self.intrinsic_matrix = np.asarray([ 6.0727040957659040e+02, 0., 3.0757300398967601e+02, 0.,
             #       6.0768864690145904e+02, 2.8935674612358201e+02, 0., 0., 1. ], dtype = np.float64)
-            self.intrisinc_matrix = np.array([ 1120, 0.0,1280/2, 0, 1120, 720/2, 0, 0, 1], dtype = np.float64).reshape(3,3)
-"""            self.intrinsic_matrix = np.asarray([500, 0., self.imageSize[0] / 2.0, 0.,
-                   500, self.imageSize[1] / 2.0, 0., 0., 1.], dtype = np.float64)
-            self.intrinsic_matrix.shape = (3, 3)""" 
+            self.intrinsic_matrix = np.array([ 1120, 0.0,1280/2, 0, 1120, 720/2, 0, 0, 1], dtype = np.float64).reshape(3,3)
+            #self.intrinsic_matrix = np.asarray([500, 0., self.imageSize[0] / 2.0, 0.,
+            #       500, self.imageSize[1] / 2.0, 0., 0., 1.], dtype = np.float64)
+            #self.intrinsic_matrix.shape = (3, 3) 
             #self.distortion_coeffs = np.asarray([ 1.1911006165076067e-01, -1.0003366233413549e+00,
             #       1.9287903277399834e-02, -2.3728201444308114e-03, -2.8137265581326476e-01 ], dtype = np.float64)
             self.distortion_coeffs = np.asarray([0., 0., 2.0546093607192093e-02, -3.5538453075048249e-03, 0.], dtype = np.float64)
