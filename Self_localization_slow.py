@@ -147,7 +147,7 @@ def draw_aruco_objects(ids, img, corners, intrinsic_matrix, distortion_coeffs, r
 
 
 # Main program #
-def self_locate(frameReference, init_poses = []):
+def self_locate(cam, frameReference, init_poses = []):
     
     try:
         if showGUI:
@@ -178,7 +178,7 @@ def self_locate(frameReference, init_poses = []):
         #arlo = robot.Robot()
         
         # Allocate space for world map
-        world = np.zeros((500,500,3), dtype=np.uint8)
+        world = np.zeros(cam,500,3), dtype=np.uint8)
     
         # Draw map
         draw_world(est_pose, particles, world)
@@ -223,8 +223,8 @@ def self_locate(frameReference, init_poses = []):
             #colour = cam.get_next_frame()
             
             # Detect objects
-            frameReference = Camera.get_next_frame()
-            objectIDs, dists, angles = Camera.detect_aruco_objects(frameReference)
+            frameReference = cam.get_next_frame()
+            objectIDs, dists, angles = cam.detect_aruco_objects(frameReference)
             sleep(1)            
             if not isinstance(objectIDs, type(None)):
                 count += 1
@@ -277,7 +277,7 @@ def self_locate(frameReference, init_poses = []):
                     probabilities.append(elm.getWeight()/sum_of_weights)
                     elm.setWeight(elm.getWeight()/sum_of_weights)
                     #print("probability: ", elm.getWeight())
-                Camera.draw_aruco_objects(frameReference)
+                cam.draw_aruco_objects(frameReference)
                 
                 # Resampling
                 # XXX: You do thisQQQQQQ
