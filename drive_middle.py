@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 import actions
 import robot
+import particle
 import Self_localization_slow as sls
 from time import sleep
 from camera import Camera
@@ -89,7 +90,8 @@ sign, theta = np.sign(theta_corr), np.abs(theta_corr)
 
 #Make the robot turn towards middle
 actions.turn_degrees(theta, sign)
-move_particle(particles, 0,0, theta_corr) #eventuel fortegnsfejl
+move_particle(particles, 0,0, theta_corr)
+particle.add_uncertainty(particles, 0.0, 0.05)#eventuel fortegnsfejl
 #Make the robot drive into the middle. The unit for dist should be in mm. Think the output for driving strat might be in meters.. :/
 actions.forward_mm(dist*10)
 
