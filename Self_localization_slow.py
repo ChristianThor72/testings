@@ -162,7 +162,7 @@ def self_locate(cam, frameReference, init_poses = []):
     
     
         # Initialize particles
-        num_particles = 5000
+        num_particles = 20000
         if len(init_poses) != 0:
             particles = init_poses
         else:
