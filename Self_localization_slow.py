@@ -326,7 +326,6 @@ def self_locate(frameReference, init_poses = []):
    
 #theta, x, y, parti = self_locate()
 #print(theta, x, y)
-self_locate()
 
 
 
