@@ -252,7 +252,7 @@ def self_locate(cam, frameReference, init_poses = []):
                 
                 print("ny omgang ")
                 sigma = 5
-                sigma_theta = 0.05
+                sigma_theta = 0.15
                 sum_of_weights = 0
                 #print(objectIDs[0])
                 box_x = landmarks[int(objectIDs[0])][0] #x koordinat for kassen der er observeret
