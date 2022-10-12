@@ -31,7 +31,7 @@ def driving_strat(middle, pose):
     return theta_new, dist
 
 
-def find_pose():
+def find_pose(particles):
     #List of found Id's aka boxes
     id_lst = []
     
@@ -79,7 +79,7 @@ def find_pose():
     return pose
 
 #Find pose
-pose = find_pose()
+pose = find_pose(particles)
 
 # Finding theta to correct turn direction and dist to drive
 theta_corr, dist = driving_strat([150,0], pose)
