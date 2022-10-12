@@ -90,10 +90,12 @@ theta_corr, dist = driving_strat([150,0], pose)
 sign, theta = np.sign(theta_corr), np.abs(theta_corr)
 
 #Make the robot turn towards middle
+print(theta_corr)
 actions.turn_degrees(theta, sign)
 move_particle(particles, 0,0, theta_corr)
 particle.add_uncertainty(particles, 0.0, 0.05)#eventuel fortegnsfejl
 #Make the robot drive into the middle. The unit for dist should be in mm. Think the output for driving strat might be in meters.. :/
+print(dist*10)
 actions.forward_mm(dist*10)
 
 #Make sure to stop the robot.
