@@ -214,7 +214,17 @@ def self_locate(cam, frameReference, init_poses = []):
                     angular_velocity += 0.2
                 elif action == ord('d'): # Right
                     angular_velocity -= 0.2
-         
+  
+            if showGUI:
+                # Draw map
+                draw_world(est_pose, particles, world)
+        
+                # Show frame
+                cv2.imshow(WIN_RF1, frameReference)
+    
+                # Show world
+                cv2.imshow(WIN_World, world)
+        
     
     
             
