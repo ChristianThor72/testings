@@ -27,7 +27,7 @@ def driving_strat(middle, pose):
     delta_y = middle[1]-pose[1]
     delta_x = middle[0]-pose[0]
     dist = np.sqrt(delta_x**2 + delta_y**2)
-    theta = np.arccos(delta_y/dist) 
+    theta = np.arccos(delta_x/dist) 
     theta_new = (pose[2]-theta)*180/np.pi
     return theta_new, dist
 
