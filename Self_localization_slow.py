@@ -59,7 +59,7 @@ CBLACK = (0, 0, 0)
 
 # Landmarks.
 # The robot knows the position of 2 landmarks. Their coordinates are in the unit centimeters [cm].
-landmarkIDs = [1, 2]
+landmarkIDs = [1, 2, 3, 4, 5]
 landmarks = {
     1: (0.0, 0.0),  # Coordinates for landmark 1
     2: (300.0, 0.0)  # Coordinates for landmark 2
@@ -108,7 +108,7 @@ def draw_world(est_pose, particles, world):
         cv2.line(world, (x,y), b, colour, 2)
 
     # Draw landmarks
-    for i in range(len(landmarkIDs)):
+    for i in range(len(landmarks)):
         ID = landmarkIDs[i]
         lm = (int(landmarks[ID][0] + offsetX), int(ymax - (landmarks[ID][1] + offsetY)))
         cv2.circle(world, lm, 5, landmark_colors[i], 2)
