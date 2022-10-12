@@ -178,7 +178,7 @@ def self_locate(cam, frameReference, init_poses = []):
         #arlo = robot.Robot()
         
         # Allocate space for world map
-        world = np.zeros(cam,500,3), dtype=np.uint8)
+        world = np.zeros(500,500,3), dtype=np.uint8)
     
         # Draw map
         draw_world(est_pose, particles, world)
