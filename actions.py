@@ -4,8 +4,9 @@ from time import sleep
 import numpy as np
 import cv2
 from camera import Camera
+from Parameters import params
 
-
+Dict, camera_matrix, dist_coeffs, markerLength = params()
 
 arlo = robot.Robot()
 sleep(0.02)
@@ -58,6 +59,7 @@ def drive_to_object(dist_mm, ang, sign):
     forward_mm(dist_mm)
     sleep(0.5)
     
+
 def scan_for_object(cam,dict):
     for _ in range(18):
         turn_degrees(20, 1) #Turning right
@@ -65,14 +67,16 @@ def scan_for_object(cam,dict):
         temp_frame = cam.get_next_frame()
         corners, ids, rejected = cv2.aruco.detectMarkers(temp_frame, dict)
         if corners:
+            dist, ang_deg, signfunc = detector(corners, markerLength, camera_matrix, dist_coeffs)
+            turn_degrees(ang_deg, signfunc)
+            sleep(0.5)
             arlo.stop()
             break
         arlo.stop()
         
     
-        
-"Sådan, Flemming! "
-        
+
+
         
         
         
