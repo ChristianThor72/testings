@@ -301,7 +301,7 @@ def self_locate(cam, frameReference, init_poses = []):
 
                 
                 #adding noise
-                #particle.add_uncertainty(particles, 0.1, 0.1)
+                particle.add_uncertainty(particles, 1.5, 0.1)
 
                 # Draw detected objects
             else:
