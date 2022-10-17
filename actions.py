@@ -58,9 +58,8 @@ def drive_to_object(dist_mm, ang, sign):
     forward_mm(dist_mm)
     sleep(0.5)
     
-
 def scan_for_object(cam,dict):
-    for _ in range(1):
+    for _ in range(18):
         turn_degrees(20, 1) #Turning right
         sleep(0.75) #Sleep time it takes to turn 30 degrees.
         temp_frame = cam.get_next_frame()
