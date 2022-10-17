@@ -35,10 +35,10 @@ def driving_strat(middle, pose):
 def find_pose(particles):
     #List of found Id's aka boxes
     id_lst = []
-    
+    pose = None
     #Making list for the temperary particle poses. 
     parties_lst = []
-    while len(id_lst) < 2:
+    for _ in range(2):
         frameReference = cam.get_next_frame() # Read frame
         corners, ids, _ = cv2.aruco.detectMarkers(frameReference, dict)
         cv2.aruco.drawDetectedMarkers(frameReference,corners)
@@ -78,7 +78,7 @@ def find_pose(particles):
                     pose = [x, y, theta]
     
     # Return the best estimated pose
-    return pose
+    return pose, id_lst
 
 #Find pose
 pose = find_pose(particles)
