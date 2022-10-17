@@ -3,7 +3,7 @@ import cv2
 import actions
 import robot
 import particle
-import self_localiza_unique as sls
+import self_localiza_unique as sls, unique_box
 from time import sleep
 from camera import Camera
 from particle import move_particle

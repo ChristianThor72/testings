@@ -143,6 +143,15 @@ def draw_aruco_objects(ids, img, corners, intrinsic_matrix, distortion_coeffs, r
 
     return outimg
 
+def unique_box(objectIDs = None, dists = None, angles = None, corners = None):
+    """Returns the ID of the object that is closest to the robot."""
+
+    if len(objectIDs) == 0:
+        return None, None, None, None
+    else:
+        min_dist = np.min(dists)
+        min_index = np.argmin(dists)
+        return objectIDs[min_index], min_dist, angles[min_index], corners[min_index]
 
 # Main program #
 def self_locate(cam, frameReference, init_poses = []):
@@ -229,15 +238,7 @@ def self_locate(cam, frameReference, init_poses = []):
     
             # Fetch next frame
             #colour = cam.get_next_frame()
-            def unique_box(objectIDs = None, dists = None, angles = None, corners = None):
-                """Returns the ID of the object that is closest to the robot."""
 
-                if len(objectIDs) == 0:
-                    return None, None, None, None
-                else:
-                    min_dist = np.min(dists)
-                    min_index = np.argmin(dists)
-                    return objectIDs[min_index], min_dist, angles[min_index], corners[min_index]
             
             # Detect objects
             frameReference = cam.get_next_frame()
