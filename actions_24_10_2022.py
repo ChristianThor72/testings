@@ -9,7 +9,7 @@ from Parameters import params
 from particle import move_particle
 import random
 
-Dict, camera_matrix, dist_coeffs, markerLength = params()
+dict, camera_matrix, dist_coeffs, markerLength = params()
 
 arlo = robot.Robot()
 sleep(0.02)
