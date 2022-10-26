@@ -1,4 +1,5 @@
 from gettext import find
+from traceback import print_tb
 import numpy as np
 import cv2
 import actions
@@ -49,38 +50,42 @@ while not finished:
    
    #Hvis den ikke har besøgt landmark 1. 
    while not status1:
-       #Tager et billede og finder dist til tætteste object med id 1
-       corners, ids = actions.get_corners_ids(cam, dict, 1)
-       dist_mm, ang, sign = actions.detector(corners)
-       actions.turn_degrees(ang, sign) #Drejer hen imod objected
-       
-       #Gør klar til at køre imod objected
-       safety_dist = 0.20
-       start_time = time.perf_counter()
-       time_cap = 2.235 * ( float(dist_mm*0.001) - safety_dist)
-       
-       #Kører imod obejcted og tjekker hele tiden sensor
-       arlo.go_diff(69, 70, 1, 1)
-       while True:
-           if (float(time.perf_counter()) - float(start_time)) > time_cap:
-               arlo.stop()
-               break
-           if (arlo.read_front_ping_sensor() >= safety_dist+5 
-               and arlo.read_left_ping_sensor >= safety_dist+5 
-               and arlo.read_right_ping_sensor >= safety_dist+5):
-               arlo.stop()
-               break
-       
-       #Check if it is close to id 1
-       status1 = am_i_close(cam, 1)
-       
-       visited_landmarks.append(1)
-       #If it is not close enough?? Then what? Maybe turn 30 degrees, 
-       # drive 15cm and turn 30 degrees back? As if it is not close enough,
-       # it must be because a object is close to the side sensors. 
+      print("status 1: ", status1)
+      #Tager et billede og finder dist til tætteste object med id 1
+      corners, ids = actions.get_corners_ids(cam, dict, 1)
+      dist_mm, ang, sign = actions.detector(corners)
+      actions.turn_degrees(ang, sign) #Drejer hen imod objected
+      
+      #Gør klar til at køre imod objected
+      safety_dist = 0.20
+      start_time = time.perf_counter()
+      time_cap = 2.235 * ( float(dist_mm*0.001) - safety_dist)
+      
+      #Kører imod obejcted og tjekker hele tiden sensor
+      print("DRIVING")
+      arlo.go_diff(69, 70, 1, 1)
+      while True:
+         if (float(time.perf_counter()) - float(start_time)) > time_cap:
+            arlo.stop()
+            break
+         if (arlo.read_front_ping_sensor() >= safety_dist+5 
+            and arlo.read_left_ping_sensor >= safety_dist+5 
+            and arlo.read_right_ping_sensor >= safety_dist+5):
+            arlo.stop()
+            break
+      
+      #Check if it is close to id 1
+      status1 = am_i_close(cam, 1)
+      
+      visited_landmarks.append(1)
+      #If it is not close enough?? Then what? Maybe turn 30 degrees, 
+      # drive 15cm and turn 30 degrees back? As if it is not close enough,
+      # it must be because a object is close to the side sensors. 
 
 
    while not status2:
+      
+      print("status 2: ", status2)
       current_id = 2
       particles = sls.initialize_particles(NUM_PARTICLES)
       est_pose, particles = find_pose(particles, cam, current_id)
