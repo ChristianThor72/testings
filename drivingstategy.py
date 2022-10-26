@@ -102,9 +102,25 @@ while not finished:
       
       delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
       delta_y = landmarks[current_id][1]*10 - est_pose[1]*10
-      dist = np.sqrt(delta_x**2 + delta_y**2)
+      dist_mm = np.sqrt(delta_x**2 + delta_y**2)
       theta = 0 #vi forventer at vi kigger op kassen
-      actions.drive_to_object(dist, 0, 1)
+ #     actions.drive_to_object(dist, 0, 1)
+      safety_dist = 0.20
+      start_time = time.perf_counter()
+      time_cap = 2.235 * ( float(dist_mm*0.001) - safety_dist)
+      
+      #Kører imod obejcted og tjekker hele tiden sensor
+      print("DRIVING")
+      arlo.go_diff(69, 70, 1, 1)
+      while True:
+         if (float(time.perf_counter()) - float(start_time)) > time_cap:
+            arlo.stop()
+            break
+         if not (arlo.read_front_ping_sensor() >= safety_dist+5 
+            and arlo.read_left_ping_sensor() >= safety_dist+5 
+            and arlo.read_right_ping_sensor() >= safety_dist+5):
+            arlo.stop()
+            break
       status2 = am_i_close(cam,current_id)
       visited_landmarks.append(current_id)
 
