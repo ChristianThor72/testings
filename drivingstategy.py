@@ -100,8 +100,8 @@ while not finished:
       current_id = 2
       est_pose, particles = find_pose(particles, cam, current_id)
       
-      delta_x = landmarks[current_id][0] - est_pose[0]
-      delta_y = landmarks[current_id][1] - est_pose[1]
+      delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
+      delta_y = landmarks[current_id][1]*10 - est_pose[1]*10
       dist = np.sqrt(delta_x**2 + delta_y**2)
       theta = 0 #vi forventer at vi kigger op kassen
       actions.drive_to_object(dist, 0, 1)
