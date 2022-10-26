@@ -82,7 +82,7 @@ def get_corners_ids(obj_ids, corners, ids):
     for i in range(len(ids)):
        if ids[i] == obj_ids:
            temp_corners.append(corners[i])
-    dist, _, _ = detector(temp_corners)
+    dist, _, _ = detector(temp_corners, markerLength, camera_matrix, dist_coeffs)
     index = np.argmin(dist)
     corners = temp_corners[index]
         
@@ -97,7 +97,7 @@ def am_i_close(cam, obj_ids):
     for i in range(len(ids)):
        if ids[i] == obj_ids:
            temp_corners.append(corners[i])
-    dist, _, _ = detector(temp_corners)
+    dist, _, _ = detector(temp_corners, markerLength, camera_matrix, dist_coeffs)
     index = np.argmin(dist)
     corners = temp_corners[index]
     
@@ -141,7 +141,7 @@ def find_pose(particles, cam, obj_ids):
             for i in range(len(ids)):
                 if ids[i] == obj_ids:
                     temp_corners.append(corners[i])
-            dist, _,_ = detector(temp_corners)
+            dist, _, _ = detector(temp_corners, markerLength, camera_matrix, dist_coeffs)
             dist = np.array(dist)
             index = np.argmin(dist)
             corners = temp_corners[index]

@@ -16,8 +16,8 @@ import time
 arlo = robot.Robot()
 cam = Camera(0, robottype = 'arlo', useCaptureThread = True)
 sleep(1)
-arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_6X6_250)
-dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
+dict, camera_matrix, dist_coeffs, markerLength = params()
+
 
 NUM_PARTICLES = 20000
 
@@ -58,7 +58,7 @@ while not finished:
       print("HER: ", corners)
       if corners:
          corners, ids = actions.get_corners_ids(1, corners, ids)
-         dist_mm, ang, sign = actions.detector(corners)
+         dist_mm, ang, sign = actions.detector(corners, markerLength, camera_matrix, dist_coeffs)
          actions.turn_degrees(ang, sign) #Drejer hen imod objected
          
          #Gør klar til at køre imod objected
