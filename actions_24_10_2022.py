@@ -81,7 +81,7 @@ def scan_for_object(cam,dict, obj_ids):
         corners, ids, rejected = cv2.aruco.detectMarkers(temp_frame, dict)
         temp_corners = []
         dists = []
-        if corners:
+        if corners and obj_ids in ids:
             for i in range(len(ids)):
                 if ids[i] == obj_ids:
                         temp_corners.append(corners[i])
@@ -91,7 +91,7 @@ def scan_for_object(cam,dict, obj_ids):
                 print("DISTANCER: ", dists)
                 index = np.argmin(dists)
                 corners = temp_corners[index]
-        if corners and obj_ids in ids:
+        #if corners and obj_ids in ids:
             dist, ang_deg, signfunc = detector(corners, markerLength, camera_matrix, dist_coeffs)
             turn_degrees(ang_deg, signfunc)
             sleep(0.5)
