@@ -84,6 +84,7 @@ def get_corners_ids(obj_ids, corners, ids):
        if ids[i] == obj_ids:
            temp_corners.append(corners[i])
     dist, _, _ = detector(temp_corners, markerLength, camera_matrix, dist_coeffs)
+    print("DISTANCER: ", dist)
     index = np.argmin(dist)
     corners = temp_corners[index]
         
