@@ -15,6 +15,14 @@ arlo = robot.Robot()
 sleep(1)
 
 
+def backward_m(m, leftSpeed = 69, rightSpeed = 70):
+    start_time = time.perf_counter()
+    print(arlo.go_diff(leftSpeed, rightSpeed, 0, 0))
+    while True:
+        if ((float(time.perf_counter()) - float(start_time)) > 2.235 * float(m) - 2.235 * 0.15 ):
+            print(arlo.stop())
+            break  
+
 def forward_m(m, leftSpeed = 69, rightSpeed = 70):
     start_time = time.perf_counter()
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
@@ -111,7 +119,7 @@ def am_i_close(cam, obj_ids):
     index = np.argmin(dist)
     corners = temp_corners[index]
     
-    if dists[index] < 0.40 and ids == obj_ids:
+    if dists[index] < 0.70 and ids == obj_ids:
         return True
     else:
         return False
