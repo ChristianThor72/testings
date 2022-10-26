@@ -7,6 +7,7 @@ import cv2
 from camera import Camera
 from Parameters import params
 from particle import move_particle
+import Self_localization_slow as sls
 import random
 
 dict, camera_matrix, dist_coeffs, markerLength = params()
@@ -152,7 +153,7 @@ def find_pose(particles, cam, obj_ids):
         
         #if no box is found or the same box is found
         if corners == None or obj_ids not in ids:  
-            scan_succes = scan_for_object()
+            scan_succes = scan_for_object(cam, dict)
             #if scan_succes == 0: #0 is fail
                 #random_movement()
         
@@ -169,6 +170,6 @@ def find_pose(particles, cam, obj_ids):
             theta, x, y, parties = sls.self_locate(cam, frameReference, particles)  
             particles = parties
             pose = [x, y, theta]
-
-        return pose, particles
+            return pose, particles
+            break
         
