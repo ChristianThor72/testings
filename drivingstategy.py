@@ -15,6 +15,7 @@ import time
 
 arlo = robot.Robot()
 cam = Camera(0, robottype = 'arlo', useCaptureThread = True)
+sleep(1)
 dict, camera_matrix, dist_coeffs, markerLength = params()
 sleep(1)
 
@@ -53,6 +54,7 @@ while not finished:
       #Tager et billede og finder dist til tætteste object med id 1
       temp_frame = cam.get_next_frame()
       corners, ids, rejected = cv2.aruco.detectMarkers(temp_frame, dict)
+      print("HER: ", corners)
       if corners:
          corners, ids = actions.get_corners_ids(1, corners, ids)
          dist_mm, ang, sign = actions.detector(corners)
