@@ -55,6 +55,7 @@ while not finished:
       #Tager et billede og finder dist til tætteste object med id 1
       temp_frame = cam.get_next_frame()
       corners, ids, rejected = cv2.aruco.detectMarkers(temp_frame, dict)
+      print(ids)
       print("HER: ", corners)
       if corners:
          corners, ids = actions.get_corners_ids(1, corners, ids)
