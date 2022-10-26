@@ -80,14 +80,17 @@ def scan_for_object(cam,dict):
         
 def get_corners_ids(obj_ids, corners, ids):
     temp_corners = []
+    dists=[]
     for i in range(len(ids)):
        if ids[i] == obj_ids:
-           temp_corners.append(corners[i])
-    dist, _, _ = detector(temp_corners, markerLength, camera_matrix, dist_coeffs)
+            temp_corners.append(corners[i])
+            dist, _, _ = detector(temp_corners[i], markerLength, camera_matrix, dist_coeffs)
+            dists.append(dist)
+    dists = np.array(dists)
     print("DISTANCER: ", dist)
     index = np.argmin(dist)
     corners = temp_corners[index]
-        
+    
     return corners, obj_ids
     
 
