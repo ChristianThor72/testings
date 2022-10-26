@@ -74,7 +74,7 @@ while not finished:
             if (float(time.perf_counter()) - float(start_time)) > time_cap:
                arlo.stop()
                break
-            if (arlo.read_front_ping_sensor() >= safety_dist+5 
+            if not (arlo.read_front_ping_sensor() >= safety_dist+5 
                and arlo.read_left_ping_sensor() >= safety_dist+5 
                and arlo.read_right_ping_sensor() >= safety_dist+5):
                arlo.stop()
