@@ -61,7 +61,7 @@ def drive_to_object(dist_mm, ang, sign):
     
 
 def scan_for_object(cam,dict):
-    for _ in range(18):
+    for i in range(18):
         turn_degrees(20, 1) #Turning right
         sleep(0.75) #Sleep time it takes to turn 30 degrees.
         temp_frame = cam.get_next_frame()
@@ -71,7 +71,10 @@ def scan_for_object(cam,dict):
             turn_degrees(ang_deg, signfunc)
             sleep(0.5)
             arlo.stop()
+            return i+1
             break
+    if not corners:
+        return 0 
         arlo.stop()
         
     

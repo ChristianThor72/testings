@@ -45,9 +45,9 @@ def find_pose(particles):
         
         #Scanning for object
         if not corners or ids in id_lst:
-            actions.scan_for_object(cam, dict)
-            move_particle(particles, 0,0, -0.349)
-            particle.add_uncertainty(particles, 0.0, 0.05)
+            iterations = actions.scan_for_object(cam, dict)
+            move_particle(particles, 0,0, -0.349 * iterations)
+            particle.add_uncertainty(particles, 3, 0.05)
             sleep(0.5)
         
         # Checking if any object found
@@ -93,7 +93,7 @@ sign, theta = np.sign(theta_corr), np.abs(theta_corr)
 print(theta_corr)
 actions.turn_degrees(theta, sign)
 move_particle(particles, 0,0, theta_corr)
-particle.add_uncertainty(particles, 0.0, 0.05)#eventuel fortegnsfejl
+particle.add_uncertainty(particles, 3, 0.05)#eventuel fortegnsfejl
 #Make the robot drive into the middle. The unit for dist should be in mm. Think the output for driving strat might be in meters.. :/
 print(dist*10)
 actions.forward_mm(dist*10)

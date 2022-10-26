@@ -120,20 +120,52 @@ def panic_mode(safety_dist):
     if arlo.read_front_ping_sensor() >= safety_dist:
         turn_direc = random.randint(0, 1)
         arlo.go_diff(40, 40, turn_direc, NOT(turn_direc))
+
+def find_pose(particles):
+    #List of found Id's aka boxes
+    id_lst = []
+    pose = None
+    #Making list for the temperary particle poses. 
+    parties_lst = []
+    for _ in range(2):
+        frameReference = cam.get_next_frame() # Read frame
+        corners, ids, _ = cv2.aruco.detectMarkers(frameReference, dict)
+        cv2.aruco.drawDetectedMarkers(frameReference,corners)
         
+        #Scanning for object
+        if not corners or ids in id_lst:
+            iterations = actions.scan_for_object(cam, dict)
+            move_particle(particles, 0,0, -0.349 * iterations)
+            particle.add_uncertainty(particles, 3, 0.05)
+            sleep(0.5)
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        # Checking if any object found
+        if corners:
+            
+            # Checking if the object found is the first obejct found
+            if len(id_lst) == 0:
+                
+                #Making sure we are not just seeing the same object again. If we do, nothing happens, and it will start scanning again
+                if ids not in id_lst: 
+                    id_lst.append(ids)
+                    
+                    #Calling selflocate to get some poses ready for when second object is found
+                    _, _, _, parties = sls.self_locate(cam, frameReference, particles)
+                    # Saving poses
+                    #parties_lst.append(parties)
+                    particles = parties
+                    
+            # If the object found is not the first obejct found, then use this.            
+            elif len(id_lst) == 1:
+                
+                #Making sure we are not just seeing the same object again. If we do, nothing happens, and it will start scanning again
+                if ids not in id_lst:
+                    id_lst.append(ids)
+                    
+                    #Using poses from when we saw the object before. Now we should have a good pose.
+                    theta, x, y, parties = sls.self_locate(cam, frameReference, particles)  
+                    pose = [x, y, theta]
+    
+    # Return the best estimated pose
+    return pose, id_lst
         
