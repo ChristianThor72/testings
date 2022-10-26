@@ -114,7 +114,7 @@ def am_i_close(cam, obj_ids):
         for i in range(len(ids)):
             if ids[i] == obj_ids:
                     temp_corners.append(corners[i])
-                    dist, _, _ = detector(temp_corners[i], markerLength, camera_matrix, dist_coeffs)
+                    dist, _, _ = detector(corners[i], markerLength, camera_matrix, dist_coeffs)
                     dists.append(dist)
             dists = np.array(dists)
             print("DISTANCER: ", dists)
@@ -159,14 +159,17 @@ def find_pose(particles, cam, obj_ids):
         
         elif corners:
             temp_corners = []
+            dists = []
             for i in range(len(ids)):
                 if ids[i] == obj_ids:
-                    temp_corners.append(corners[i])
-            dist, _, _ = detector(temp_corners, markerLength, camera_matrix, dist_coeffs)
-            dist = np.array(dist)
-            index = np.argmin(dist)
-            corners = temp_corners[index]
-            
+                        temp_corners.append(corners[i])
+                        dist, _, _ = detector(corners[i], markerLength, camera_matrix, dist_coeffs)
+                        dists.append(dist)
+                dists = np.array(dists)
+                print("DISTANCER: ", dists)
+                index = np.argmin(dists)
+                corners = temp_corners[index]
+                
             theta, x, y, parties = sls.self_locate(cam, frameReference, particles)  
             particles = parties
             pose = [x, y, theta]
