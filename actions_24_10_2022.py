@@ -98,6 +98,10 @@ def scan_for_object(cam,dict, obj_ids):
             arlo.stop()
             break
         arlo.stop()
+        if corners:
+            return 1
+        else:
+            return 0
         
 def get_corners_ids(obj_ids, corners, ids):
     temp_corners = []
@@ -162,7 +166,7 @@ def find_pose(particles, cam, obj_ids):
         frameReference = cam.get_next_frame()
         corners, ids, _ = cv2.aruco.detectMarkers(frameReference, dict)
         cv2.aruco.drawDetectedMarkers(frameReference,corners)
-        
+        scan_succes = -1
         #if no box is found or the same box is found
         if not corners or obj_ids not in ids:  
             scan_succes = scan_for_object(cam, dict, obj_ids)
@@ -170,18 +174,20 @@ def find_pose(particles, cam, obj_ids):
                 #random_movement()
         
         elif corners:
-            temp_corners = []
-            dists = []
-            for i in range(len(ids)):
-                if ids[i] == obj_ids:
-                        temp_corners.append(corners[i])
-                        dist, _, _ = detector(corners[i], markerLength, camera_matrix, dist_coeffs)
-                        dists.append(dist)
-                dists = np.array(dists)
-                print("DISTANCER: ", dists)
-                index = np.argmin(dists)
-                corners = temp_corners[index]
+            if scan_succes ==-1:
                 
+                temp_corners = []
+                dists = []
+                for i in range(len(ids)):
+                    if ids[i] == obj_ids:
+                            temp_corners.append(corners[i])
+                            dist, _, _ = detector(corners[i], markerLength, camera_matrix, dist_coeffs)
+                            dists.append(dist)
+                    dists = np.array(dists)
+                    print("DISTANCER: ", dists)
+                    index = np.argmin(dists)
+                    corners = temp_corners[index]
+                    
             theta, x, y, parties = sls.self_locate(cam, frameReference, particles)  
             particles = parties
             pose = [x, y, theta]
