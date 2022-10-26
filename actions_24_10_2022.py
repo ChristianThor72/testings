@@ -96,7 +96,7 @@ def get_corners_ids(obj_ids, corners, ids):
             dists.append(dist)
     dists = np.array(dists)
     print("DISTANCER: ", dists)
-    index = np.argmin(dist)
+    index = np.argmin(dists)
     print("closest dist", index, dists[index])
     corners = temp_corners[index]
     
