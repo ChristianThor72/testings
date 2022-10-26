@@ -123,7 +123,7 @@ def panic_mode(safety_dist):
         turn_direc = random.randint(0, 1)
         arlo.go_diff(40, 40, turn_direc, NOT(turn_direc))
 
-def find_pose(particles):
+def find_pose(particles, cam = cam ):
     #List of found Id's aka boxes
     id_lst = []
     pose = None

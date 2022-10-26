@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 import actions
 from drive_middle import NUM_PARTICLES
-from drive_middle import find_pose
+from actions_24_10_2022 import find_pose, am_i_close
 import robot
 import particle
 import Self_localization_slow as sls
@@ -18,6 +18,7 @@ cam = Camera(0, robottype = 'arlo', useCaptureThread = True)
 Dict, camera_matrix, dist_coeffs, markerLength = params()
 sleep(1)
 
+NUM_PARTICLES = 20000
 
 landmarkIDs = [1, 2, 3, 4]
 landmarks = {
@@ -29,7 +30,9 @@ landmarks = {
 #temp
 def drive_random():
    return 0
- 
+
+visited_landmarks =  []
+scanned_landmarks = []
 landmarks_required = [1,2,3,4]
 # scanner indtil den enten har scannet to kasser eller har drejet en hel omgang
 status1 = False
@@ -41,8 +44,6 @@ finished = False
 
 
 while not finished:
-   visited_landmarks =  []
-   scanned_landmarks = []
    #self localizing
    est_pose = [0,0,0]
    
@@ -71,24 +72,69 @@ while not finished:
                break
        
        #Check if it is close to id 1
-       status1 = actions.am_i_close(cam, 1)
+       status1 = am_i_close(cam, 1)
        
+       visited_landmarks.append(1)
        #If it is not close enough?? Then what? Maybe turn 30 degrees, 
        # drive 15cm and turn 30 degrees back? As if it is not close enough,
        # it must be because a object is close to the side sensors. 
 
 
    while not status2:
-        
+      current_id = 2
+      particles = sls.initialize_particles(NUM_PARTICLES)
+      est_pose, particles = find_pose(particles, cam, current_id)
+      
+      delta_x = landmarks[current_id][0] - est_pose[0]
+      delta_y = landmarks[current_id][1] - est_pose[1]
+      dist = np.sqrt(delta_x**2 + delta_y**2)
+      theta = 0 #vi forventer at vi kigger op kassen
+      actions.drive_to_object(dist, 0, 1)
+      status2 = am_i_close(cam,current_id)
+      visited_landmarks.append(current_id)
+
    
    while not status3:
-       pass
+      current_id = 3
+      particles = sls.initialize_particles(NUM_PARTICLES)
+      est_pose, particles = find_pose(particles, cam, current_id)
+      
+      delta_x = landmarks[current_id][0] - est_pose[0]
+      delta_y = landmarks[current_id][1] - est_pose[1]
+      dist = np.sqrt(delta_x**2 + delta_y**2)
+      theta = 0 #vi forventer at vi kigger op kassen
+      actions.drive_to_object(dist, 0, 1)
+      status2 = am_i_close(cam,current_id)
+      visited_landmarks.append(current_id)
+
    
    while not status4:
-       pass
+      current_id = 4
+      particles = sls.initialize_particles(NUM_PARTICLES)
+      est_pose, particles = find_pose(particles, cam, current_id)
+      
+      delta_x = landmarks[current_id][0] - est_pose[0]
+      delta_y = landmarks[current_id][1] - est_pose[1]
+      dist = np.sqrt(delta_x**2 + delta_y**2)
+      theta = 0 #vi forventer at vi kigger op kassen
+      actions.drive_to_object(dist, 0, 1)
+      status2 = am_i_close(cam,current_id)
+      visited_landmarks.append(current_id)
+
    
    while not status5:
-       pass
+      current_id = 1
+      particles = sls.initialize_particles(NUM_PARTICLES)
+      est_pose, particles = find_pose(particles, cam, current_id)
+      
+      delta_x = landmarks[current_id][0] - est_pose[0]
+      delta_y = landmarks[current_id][1] - est_pose[1]
+      dist = np.sqrt(delta_x**2 + delta_y**2)
+      theta = 0 #vi forventer at vi kigger op kassen
+      actions.drive_to_object(dist, 0, 1)
+      status2 = am_i_close(cam,current_id)
+      visited_landmarks.append(current_id)
+
        
 
    if len(visited_landmarks) == 5:
