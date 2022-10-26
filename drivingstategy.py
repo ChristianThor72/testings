@@ -82,7 +82,8 @@ while not finished:
          
          #Check if it is close to id 1
          sleep(5)
-         actions.backward_m(0.3)
+         actions.backward_m(1)
+         sleep(2)
          status1 = am_i_close(cam, 1)
          
          visited_landmarks.append(1)
