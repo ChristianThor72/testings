@@ -20,6 +20,7 @@ dict, camera_matrix, dist_coeffs, markerLength = params()
 
 
 NUM_PARTICLES = 20000
+particles = sls.initialize_particles(NUM_PARTICLES)
 
 landmarkIDs = [1, 2, 3, 4]
 landmarks = {
@@ -42,7 +43,6 @@ status3 = False
 status4 = False
 status5 = False
 finished = False
-
 
 while not finished:
    #self localizing
@@ -85,7 +85,8 @@ while not finished:
          actions.backward_m(0.7)
          sleep(2)
          status1 = am_i_close(cam, 1)
-         
+         if status1:
+            est_pose, particles = find_pose(particles, cam, current_id)
          visited_landmarks.append(1)
          #If it is not close enough?? Then what? Maybe turn 30 degrees, 
          # drive 15cm and turn 30 degrees back? As if it is not close enough,
@@ -96,7 +97,6 @@ while not finished:
       
       print("status 2: ", status2)
       current_id = 2
-      particles = sls.initialize_particles(NUM_PARTICLES)
       est_pose, particles = find_pose(particles, cam, current_id)
       
       delta_x = landmarks[current_id][0] - est_pose[0]
