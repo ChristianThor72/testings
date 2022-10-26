@@ -111,7 +111,7 @@ def am_i_close(cam, obj_ids):
     index = np.argmin(dist)
     corners = temp_corners[index]
     
-    if dist[index] < 0.40 and ids == obj_ids:
+    if dists[index] < 0.40 and ids == obj_ids:
         return True
     else:
         return False

@@ -61,7 +61,7 @@ while not finished:
          corners, ids = actions.get_corners_ids(1, corners, ids)
          dist_mm, ang, sign = actions.detector(corners, markerLength, camera_matrix, dist_coeffs)
          actions.turn_degrees(ang, sign) #Drejer hen imod objected
-         
+         print("DISTDISTDIST, dist_mm")
          #Gør klar til at køre imod objected
          safety_dist = 0.20
          start_time = time.perf_counter()
