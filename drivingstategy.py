@@ -15,7 +15,7 @@ import time
 
 arlo = robot.Robot()
 cam = Camera(0, robottype = 'arlo', useCaptureThread = True)
-Dict, camera_matrix, dist_coeffs, markerLength = params()
+dict, camera_matrix, dist_coeffs, markerLength = params()
 sleep(1)
 
 NUM_PARTICLES = 20000

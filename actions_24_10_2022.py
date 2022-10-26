@@ -12,7 +12,7 @@ import random
 dict, camera_matrix, dist_coeffs, markerLength = params()
 
 arlo = robot.Robot()
-sleep(0.02)
+sleep(1)
 
 
 def forward_m(m, leftSpeed = 69, rightSpeed = 70):
