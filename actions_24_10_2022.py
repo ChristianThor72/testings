@@ -153,7 +153,7 @@ def find_pose(particles, cam, obj_ids):
         
         #if no box is found or the same box is found
         if corners == None or obj_ids not in ids:  
-            scan_succes = scan_for_object(cam, dict)
+            scan_succes = scan_for_object(cam, dict, obj_ids)
             #if scan_succes == 0: #0 is fail
                 #random_movement()
         
