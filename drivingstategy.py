@@ -82,7 +82,7 @@ while not finished:
          
          #Check if it is close to id 1
          sleep(5)
-         actions.backward_m(0.5)
+         actions.backward_m(0.7)
          sleep(2)
          status1 = am_i_close(cam, 1)
          
