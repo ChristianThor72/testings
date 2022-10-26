@@ -75,8 +75,8 @@ while not finished:
                arlo.stop()
                break
             if (arlo.read_front_ping_sensor() >= safety_dist+5 
-               and arlo.read_left_ping_sensor >= safety_dist+5 
-               and arlo.read_right_ping_sensor >= safety_dist+5):
+               and arlo.read_left_ping_sensor() >= safety_dist+5 
+               and arlo.read_right_ping_sensor() >= safety_dist+5):
                arlo.stop()
                break
          
