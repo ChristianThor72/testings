@@ -16,8 +16,8 @@ import time
 arlo = robot.Robot()
 cam = Camera(0, robottype = 'arlo', useCaptureThread = True)
 sleep(1)
-dict, camera_matrix, dist_coeffs, markerLength = params()
-sleep(1)
+arucoDict = cv2.aruco.Dictionary_get(cv2.aruco.DICT_6X6_250)
+dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_250)
 
 NUM_PARTICLES = 20000
 

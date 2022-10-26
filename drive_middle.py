@@ -32,7 +32,7 @@ def driving_strat(middle, pose):
     return theta_new, dist
 
 
-def find_pose(particles):
+def find_pose(particles, objectID):
     #List of found Id's aka boxes
     id_lst = []
     pose = None
