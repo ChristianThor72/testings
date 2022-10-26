@@ -64,15 +64,18 @@ while not finished:
            if (float(time.perf_counter()) - float(start_time)) > time_cap:
                arlo.stop()
                break
-           if (arlo.read_front_ping_sensor() >= safety_dist+5 
-               and arlo.read_left_ping_sensor >= safety_dist+5 
-               and arlo.read_right_ping_sensor >= safety_dist+5):
+           if not (arlo.read_front_ping_sensor() >= safety_dist+5 
+               and arlo.read_left_ping_sensor() >= safety_dist+5 
+               and arlo.read_right_ping_sensor() >= safety_dist+5):
                arlo.stop()
                break
        
        #Check if it is close to id 1
        status1 = actions.am_i_close(cam, 1)
        
+       if status1 == False:
+           actions.panic_mode()
+           
        #If it is not close enough?? Then what? Maybe turn 30 degrees, 
        # drive 15cm and turn 30 degrees back? As if it is not close enough,
        # it must be because a object is close to the side sensors. 

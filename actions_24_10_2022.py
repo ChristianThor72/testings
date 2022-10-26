@@ -5,6 +5,7 @@ import numpy as np
 import cv2
 from camera import Camera
 from Parameters import params
+import random
 
 Dict, camera_matrix, dist_coeffs, markerLength = params()
 
@@ -105,9 +106,20 @@ def am_i_close(cam, obj_ids):
         return True
     else:
         return False
-        
-        
-        
+
+
+def NOT(a):
+    if a != 0 and a != 1:
+        return "error"
+    binary = 0
+    if not a == True:
+        binary = 1
+    return binary
+
+def panic_mode(safety_dist):
+    if arlo.read_front_ping_sensor() >= safety_dist:
+        turn_direc = random.randint(0, 1)
+        arlo.go_diff(40, 40, turn_direc, NOT(turn_direc))
         
         
         
