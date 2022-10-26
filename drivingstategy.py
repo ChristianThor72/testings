@@ -50,6 +50,7 @@ while not finished:
    
    #Hvis den ikke har besøgt landmark 1. 
    while not status1:
+      sleep(1)
       print("status 1: ", status1)
       #Tager et billede og finder dist til tætteste object med id 1
       temp_frame = cam.get_next_frame()
