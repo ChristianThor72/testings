@@ -47,6 +47,7 @@ def detector(corners, markerLength, camera_matrix, dist_coeffs):
     ez = ([0,0,1])
     
     rvec, tvec, _ = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, camera_matrix, dist_coeffs)
+    print(corners, tvec)
     dist = np.linalg.norm(rvec-tvec)
     tvec = tvec.reshape((3,))
     dist = np.linalg.norm(tvec)
