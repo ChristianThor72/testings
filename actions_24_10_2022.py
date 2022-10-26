@@ -77,10 +77,7 @@ def scan_for_object(cam,dict):
             break
         arlo.stop()
         
-def get_corners_ids(cam, dict, obj_ids):
-    temp_frame = cam.get_next_frame()
-    corners, ids, rejected = cv2.aruco.detectMarkers(temp_frame, dict)
-    
+def get_corners_ids(obj_ids, corners, ids):
     temp_corners = []
     for i in range(len(ids)):
        if ids[i] == obj_ids:
