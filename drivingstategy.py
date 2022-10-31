@@ -108,6 +108,7 @@ while not finished:
       safety_dist = 200
       start_time = time.perf_counter()
       time_cap = 2.235 * ( float(dist_mm*0.001) - safety_dist)
+      print("Dette er distancen: ", dist_mm)
       
       #Kører imod obejcted og tjekker hele tiden sensor
       print("DRIVING")
