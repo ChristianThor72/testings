@@ -270,7 +270,7 @@ while not finished:
    if len(visited_landmarks) == 5:
       finished = True
       
-
+print("We did it!!")
 
 """
       NUM_PARTICLES = 20000
