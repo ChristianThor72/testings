@@ -129,9 +129,9 @@ def am_i_close(cam, obj_ids):
     if corners:
         for i in range(len(ids)):
             if ids[i] == obj_ids:
-                    temp_corners.append(corners[i])
-                    dist, _, _ = detector(corners[i], markerLength, camera_matrix, dist_coeffs)
-                    dists.append(dist)
+                temp_corners.append(corners[i])
+                dist, _, _ = detector(corners[i], markerLength, camera_matrix, dist_coeffs)
+                dists.append(dist)
             dists = np.array(dists)
             print("DISTANCER: ", dists)
             index = np.argmin(dists)
