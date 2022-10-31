@@ -98,6 +98,8 @@ while not finished:
       
       print("status 2: ", status2)
       current_id = 2
+      particles = sls.initialize_particles(NUM_PARTICLES)
+
       est_pose, particles = find_pose(particles, cam, current_id)
       
       delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
@@ -139,6 +141,7 @@ while not finished:
           
       print("status 3: ", status3)
       current_id = 3
+      particles = sls.initialize_particles(NUM_PARTICLES)
       est_pose, particles = find_pose(particles, cam, current_id)
       
       delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
