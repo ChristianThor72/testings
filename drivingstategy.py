@@ -63,7 +63,7 @@ while not finished:
          actions.turn_degrees(ang, sign) #Drejer hen imod objected
          print("DISTDISTDIST",  dist_mm)
          #Gør klar til at køre imod objected
-         safety_dist = 0.20
+         safety_dist = 200
          start_time = time.perf_counter()
          time_cap = 2.235 * ( float(dist_mm*0.001) - safety_dist)
          
@@ -127,7 +127,7 @@ while not finished:
    
    while not status3:
       current_id = 3
-      particles = sls.initialize_particles(NUM_PARTICLES)
+   #   particles = sls.initialize_particles(NUM_PARTICLES)
       est_pose, particles = find_pose(particles, cam, current_id)
       
       delta_x = landmarks[current_id][0] - est_pose[0]
@@ -141,7 +141,7 @@ while not finished:
    
    while not status4:
       current_id = 4
-      particles = sls.initialize_particles(NUM_PARTICLES)
+      #particles = sls.initialize_particles(NUM_PARTICLES)
       est_pose, particles = find_pose(particles, cam, current_id)
       
       delta_x = landmarks[current_id][0] - est_pose[0]
@@ -155,7 +155,7 @@ while not finished:
    
    while not status5:
       current_id = 1
-      particles = sls.initialize_particles(NUM_PARTICLES)
+     # particles = sls.initialize_particles(NUM_PARTICLES)
       est_pose, particles = find_pose(particles, cam, current_id)
       
       delta_x = landmarks[current_id][0] - est_pose[0]
