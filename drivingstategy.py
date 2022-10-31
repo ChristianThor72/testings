@@ -105,7 +105,7 @@ while not finished:
       dist_mm = np.sqrt(delta_x**2 + delta_y**2)
       theta = 0 #vi forventer at vi kigger op kassen
  #     actions.drive_to_object(dist, 0, 1)
-      safety_dist = 0.20
+      safety_dist = 200
       start_time = time.perf_counter()
       time_cap = 2.235 * ( float(dist_mm*0.001) - safety_dist)
       
