@@ -119,17 +119,20 @@ while not finished:
             break
          if not (arlo.read_front_ping_sensor() >= safety_dist*1000+5 
             and arlo.read_left_ping_sensor() >= safety_dist*1000+5 
-            and arlo.read_right_ping_sensor() >= safety_dist*1000+5):
+            and arlo.read_right_ping_sensor() >= safety_dist**1000+5):
             arlo.stop()
             break
-
+      
+      #Check if it is close to id 2
       sleep(5)
       actions.backward_m(0.7)
       sleep(2)
-      status2 = am_i_close(cam, current_id)
+      status1 = am_i_close(cam, 2)
+      current_id = 2
       if status1:
          est_pose, particles = find_pose(particles, cam, current_id)
          visited_landmarks.append(2)
+
 
    
    while not status3:
