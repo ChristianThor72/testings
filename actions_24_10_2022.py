@@ -136,8 +136,8 @@ def am_i_close(cam, obj_ids):
             print("DISTANCER: ", dists)
             index = np.argmin(dists)
             corners = temp_corners[index]
-            
-            if dists[index] < 1000 and ids == obj_ids:
+              
+            if dists[index] < 1000 and obj_ids in ids:
                 return True
             else:
                 return False
