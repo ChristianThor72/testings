@@ -217,9 +217,9 @@ while not finished:
       sleep(2.5)
       actions.backward_m(0.7)
       sleep(2)
-      status3 = am_i_close(cam, 4)
+      status4 = am_i_close(cam, 4)
       current_id = 4
-      if status3:
+      if status4:
          est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
          visited_landmarks.append(4)
 
@@ -259,9 +259,9 @@ while not finished:
       sleep(2.5)
       actions.backward_m(0.7)
       sleep(2)
-      status3 = am_i_close(cam, 1)
+      status5 = am_i_close(cam, 1)
       current_id = 1
-      if status3:
+      if status5:
          est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
          visited_landmarks.append(1)
 
