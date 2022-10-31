@@ -131,7 +131,7 @@ while not finished:
       sleep(2)
       status2 = am_i_close(cam, 2)
       current_id = 2
-      if status1:
+      if status2:
          est_pose, particles = find_pose(particles, cam, current_id)
          visited_landmarks.append(2)
 
@@ -173,7 +173,7 @@ while not finished:
       sleep(2)
       status3 = am_i_close(cam, 3)
       current_id = 3
-      if status1:
+      if status3:
          est_pose, particles = find_pose(particles, cam, current_id)
          visited_landmarks.append(3)
 
