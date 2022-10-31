@@ -62,9 +62,9 @@ CBLACK = (0, 0, 0)
 landmarkIDs = [1, 2, 3, 4, 5]
 landmarks = {
     1: (0.0, 0.0),  # Coordinates for landmark 1
-    2: (0.0, 300.0),  # Coordinates for landmark 2
-    3: (400.0, 0.0), 
-    4: (400.0, 300.0) 
+    2: (0.0, 300.0)  # Coordinates for landmark 2
+    3: (400.0, 0.0) 
+    4: (400.0, 0.0) 
 }
 landmark_colors = [CRED, CGREEN] # Colors used when drawing the landmarks
 
@@ -187,7 +187,7 @@ def self_locate(cam, frameReference, init_poses = []):
         world = np.zeros((500,500,3), dtype=np.uint8)
     
         # Draw map
-        draw_world(est_pose, particles, world)
+        #draw_world(est_pose, particles, world)
         
         
         print("Opening and initializing camera")
