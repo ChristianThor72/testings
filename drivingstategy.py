@@ -87,7 +87,7 @@ while not finished:
          status1 = am_i_close(cam, 1)
          current_id = 1
          if status1:
-            est_pose, particles = find_pose(particles, cam, current_id)
+            est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
             visited_landmarks.append(1)
          #If it is not close enough?? Then what? Maybe turn 30 degrees, 
          # drive 15cm and turn 30 degrees back? As if it is not close enough,
