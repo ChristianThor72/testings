@@ -63,7 +63,7 @@ while not finished:
          actions.turn_degrees(ang, sign) #Drejer hen imod objected
          print("DISTDISTDIST",  dist_mm)
          #Gør klar til at køre imod objected
-         safety_dist = 200
+         safety_dist = 0.2
          start_time = time.perf_counter()
          time_cap = 2.235 * ( float(dist_mm*0.001) - safety_dist)
          
@@ -74,9 +74,9 @@ while not finished:
             if (float(time.perf_counter()) - float(start_time)) > time_cap:
                arlo.stop()
                break
-            if not (arlo.read_front_ping_sensor() >= safety_dist+5 
-               and arlo.read_left_ping_sensor() >= safety_dist+5 
-               and arlo.read_right_ping_sensor() >= safety_dist+5):
+            if not (arlo.read_front_ping_sensor() >= safety_dist*1000+5 
+               and arlo.read_left_ping_sensor() >= safety_dist*1000+5 
+               and arlo.read_right_ping_sensor() >= safety_dist**1000+5):
                arlo.stop()
                break
          
@@ -105,7 +105,7 @@ while not finished:
       dist_mm = np.sqrt(delta_x**2 + delta_y**2)
       theta = 0 #vi forventer at vi kigger op kassen
  #     actions.drive_to_object(dist, 0, 1)
-      safety_dist = 200
+      safety_dist = 0.2
       start_time = time.perf_counter()
       time_cap = 2.235 * ( float(dist_mm*0.001) - safety_dist)
       print("Dette er distancen: ", dist_mm)
@@ -117,9 +117,9 @@ while not finished:
          if (float(time.perf_counter()) - float(start_time)) > time_cap:
             arlo.stop()
             break
-         if not (arlo.read_front_ping_sensor() >= safety_dist+5 
-            and arlo.read_left_ping_sensor() >= safety_dist+5 
-            and arlo.read_right_ping_sensor() >= safety_dist+5):
+         if not (arlo.read_front_ping_sensor() >= safety_dist*1000+5 
+            and arlo.read_left_ping_sensor() >= safety_dist*1000+5 
+            and arlo.read_right_ping_sensor() >= safety_dist*1000+5):
             arlo.stop()
             break
       status2 = am_i_close(cam,current_id)
