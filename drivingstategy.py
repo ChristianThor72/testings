@@ -100,7 +100,7 @@ while not finished:
       current_id = 2
       particles = sls.initialize_particles(NUM_PARTICLES)
 
-      est_pose, particles = find_pose(particles, cam, current_id)
+      est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
       
       delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
       delta_y = landmarks[current_id][1]*10 - est_pose[1]*10
@@ -109,8 +109,10 @@ while not finished:
  #     actions.drive_to_object(dist, 0, 1)
       safety_dist = 0.2
       start_time = time.perf_counter()
-      time_cap = 2.235 * ( float(dist_mm*0.001) - safety_dist)
-      print("Dette er distancen: ", dist_mm)
+      final_dist = max(dist_mm, dist_cam)
+      
+      time_cap = 2.235 * ( float(final_dist*0.001) - safety_dist)
+      print("Dette er distancen: ", final_dist)
       
       #Kører imod obejcted og tjekker hele tiden sensor
       print("DRIVING")
@@ -142,7 +144,7 @@ while not finished:
       print("status 3: ", status3)
       current_id = 3
       particles = sls.initialize_particles(NUM_PARTICLES)
-      est_pose, particles = find_pose(particles, cam, current_id)
+      est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
       
       delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
       delta_y = landmarks[current_id][1]*10 - est_pose[1]*10
@@ -151,8 +153,10 @@ while not finished:
  #     actions.drive_to_object(dist, 0, 1)
       safety_dist = 0.2
       start_time = time.perf_counter()
-      time_cap = 2.235 * ( float(dist_mm*0.001) - safety_dist)
-      print("Dette er distancen: ", dist_mm)
+      final_dist = max(dist_mm, dist_cam)
+      
+      time_cap = 2.235 * ( float(final_dist*0.001) - safety_dist)
+      print("Dette er distancen: ", final_dist)
       
       #Kører imod obejcted og tjekker hele tiden sensor
       print("DRIVING")
@@ -179,6 +183,7 @@ while not finished:
 
 
    while not status4:
+      print("status 4: ", status4)
       current_id = 4
       #particles = sls.initialize_particles(NUM_PARTICLES)
       est_pose, particles = find_pose(particles, cam, current_id)
