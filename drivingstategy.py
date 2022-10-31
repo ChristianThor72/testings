@@ -25,8 +25,8 @@ particles = sls.initialize_particles(NUM_PARTICLES)
 landmarkIDs = [1, 2, 3, 4]
 landmarks = {
     1: (0.0, 0.0),  # Coordinates for landmark 1
-    2: (400.0, 0.0),  # Coordinates for landmark 2
-    3: (0.0, 300.0),
+    2: (0.0, 300.0),  # Coordinates for landmark 2
+    3: (400.0, 0.0),
     4: (400.0, 300.0)
 }
 #temp
@@ -88,7 +88,7 @@ while not finished:
          current_id = 1
          if status1:
             est_pose, particles = find_pose(particles, cam, current_id)
-         visited_landmarks.append(1)
+            visited_landmarks.append(1)
          #If it is not close enough?? Then what? Maybe turn 30 degrees, 
          # drive 15cm and turn 30 degrees back? As if it is not close enough,
          # it must be because a object is close to the side sensors. 
@@ -102,7 +102,7 @@ while not finished:
       
       delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
       delta_y = landmarks[current_id][1]*10 - est_pose[1]*10
-      dist_mm = np.sqrt(delta_x**2 + delta_y**2)
+      dist_mm = np.sqrt((delta_x**2) + (delta_y**2))
       theta = 0 #vi forventer at vi kigger op kassen
  #     actions.drive_to_object(dist, 0, 1)
       safety_dist = 200
@@ -122,11 +122,18 @@ while not finished:
             and arlo.read_right_ping_sensor() >= safety_dist+5):
             arlo.stop()
             break
-      status2 = am_i_close(cam,current_id)
-      visited_landmarks.append(current_id)
+
+      sleep(5)
+      actions.backward_m(0.7)
+      sleep(2)
+      status2 = am_i_close(cam, current_id)
+      if status1:
+         est_pose, particles = find_pose(particles, cam, current_id)
+         visited_landmarks.append(2)
 
    
    while not status3:
+      print("status3 ", status3)
       current_id = 3
    #   particles = sls.initialize_particles(NUM_PARTICLES)
       est_pose, particles = find_pose(particles, cam, current_id)
