@@ -127,9 +127,9 @@ while not finished:
       sleep(5)
       actions.backward_m(0.7)
       sleep(2)
-      status1 = am_i_close(cam, 2)
+      status2 = am_i_close(cam, 2)
       current_id = 2
-      if status1:
+      if status2:
          est_pose, particles = find_pose(particles, cam, current_id)
          visited_landmarks.append(2)
 
