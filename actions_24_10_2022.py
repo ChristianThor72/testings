@@ -191,6 +191,6 @@ def find_pose(particles, cam, obj_ids):
             theta, x, y, parties = sls.self_locate(cam, frameReference, particles)  
             particles = parties
             pose = [x, y, theta]
-            return pose, particles
+            return pose, particles, dists[index]
             break
         
