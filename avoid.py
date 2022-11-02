@@ -48,15 +48,21 @@ def avoid_drive(obj_ids = [1]):
         print("Typen på a: ", type(sensa), " \n typen på b: ", type(sensb))
         if 70 < ang_deg < 110 and sensa < dist+10 or sensb < dist+10: 
             actions.turn_degrees(30, signfunc)
+            sleep(1)
             actions.forward_mm(dist)
+            sleep(1)
             actions.turn_degrees(-30, signfunc)
+            sleep(1)
             actions.forward_mm(dist)
         elif sensa < dist+10 or sensb < dist+10:
             print("KAN IKKE KØRE")
         else: 
             actions.turn_degrees(theta, -signfunc)
+            sleep(1)
             actions.forward_mm(dist)
+            sleep(1)
             actions.turn_degrees(theta, signfunc)
+            sleep(1)
             actions.forward_mm(dist)
 
 avoid_drive()
