@@ -171,6 +171,7 @@ def find_pose(particles, cam, obj_ids):
         if not corners or obj_ids not in ids:  
             while scan_succes == -1:
                 scan_succes = scan_for_object(cam, dict, obj_ids)
+                break
             
             sign = -1
             if scan_succes == 0: #0 is fail
