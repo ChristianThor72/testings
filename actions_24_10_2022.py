@@ -161,7 +161,7 @@ def drive_random():
     safety_dist = 500
     turn_degrees(random.randint(0, 360),1)
     sleep(1)
-    final_dist = random.randint(750*2000)
+    final_dist = random.randint(750,2000)
     time_cap = 2.235 * ( float(final_dist*0.001) - safety_dist)
     start_time = time.perf_counter()
     arlo.go_diff(70,70,1,1)
