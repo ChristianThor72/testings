@@ -253,7 +253,7 @@ def self_locate(cam, frameReference, init_poses = []):
                 # XXX: You do this
                 
                 print("ny omgang ")
-                sigma = 5
+                sigma = 10
                 sigma_theta = 0.15
                 sum_of_weights = 0
                 #print(objectIDs[0])
