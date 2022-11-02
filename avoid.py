@@ -57,11 +57,11 @@ def avoid_drive(obj_ids = [1]):
         elif sensa < dist+10 or sensb < dist+10:
             print("KAN IKKE KØRE")
         else: 
-            actions.turn_degrees(theta, -signfunc)
+            actions.turn_degrees(ang_deg, -signfunc)
             sleep(1)
             actions.forward_mm(dist)
             sleep(1)
-            actions.turn_degrees(theta, signfunc)
+            actions.turn_degrees(ang_deg, signfunc)
             sleep(1)
             actions.forward_mm(dist)
 
