@@ -157,15 +157,19 @@ def panic_mode(safety_dist):
         arlo.go_diff(40, 40, turn_direc, NOT(turn_direc))
 
 def drive_random():
+
     safety_dist = 500
     turn_degrees(random.randint(20, 340),1)
     sleep(1)
     forward_mm(random.randint(750, 2000))
-    if not (arlo.read_front_ping_sensor() >= safety_dist
-       and arlo.read_left_ping_sensor() >= safety_dist
-       and arlo.read_right_ping_sensor() >= safety_dist):
-       arlo.stop()
-       
+    
+    while True:
+
+        if not (arlo.read_front_ping_sensor() >= safety_dist
+        and arlo.read_left_ping_sensor() >= safety_dist
+        and arlo.read_right_ping_sensor() >= safety_dist):
+            arlo.stop()
+            break    
 
 def find_pose(particles, cam, obj_ids):
     while True:
