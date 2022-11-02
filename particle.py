@@ -1,62 +1,92 @@
-from turtle import forward
 import numpy as np
-import cv2
-import actions_24_10_2022 as actions
-from actions_24_10_2022 import find_pose, am_i_close
-import robot
-import particle
-import Self_localization_slow as sls
-from time import sleep
-from camera import Camera
-from particle import move_particle
-from Parameters import params
-import time
-import sys
+import random_numbers as rn
 
 
+class Particle(object):
+    """Data structure for storing particle information (state and weight)"""
+    def __init__(self, x=0.0, y=0.0, theta=0.0, weight=0.0):
+        self.x = x
+        self.y = y
+        self.theta = np.mod(theta, 2.0*np.pi)
+        self.weight = weight
 
-cam = Camera(0, robottype = 'arlo', useCaptureThread = True)
+    def getX(self):
+        return self.x
+        
+    def getY(self):
+        return self.y
+        
+    def getTheta(self):
+        return self.theta
+        
+    def getWeight(self):
+        return self.weight
 
-dict, camera_matrix, dist_coeffs, markerLength = params()
-arlo = robot.Robot()
-sleep(0.02)
+    def setX(self, val):
+        self.x = val
+
+    def setY(self, val):
+        self.y = val
+
+    def setTheta(self, val):
+        self.theta = np.mod(val, 2.0*np.pi)
+
+    def setWeight(self, val):
+        self.weight = val
 
 
-landmarkIDs = [1, 2, 3, 4]
-landmarks = {
-    1: (0.0, 0.0),  # Coordinates for landmark 1
-    2: (0.0, 300.0),  # Coordinates for landmark 2
-    3: (400.0, 0.0),
-    4: (400.0, 300.0)
-}
+def estimate_pose(particles_list):
+    """Estimate the pose from particles by computing the average position and orientation over all particles. 
+    This is not done using the particle weights, but just the sample distribution."""
+    x_sum = 0.0
+    y_sum = 0.0
+    cos_sum = 0.0
+    sin_sum = 0.0
+     
+    for particle in particles_list:
+        x_sum += particle.getX()
+        y_sum += particle.getY()
+        cos_sum += np.cos(particle.getTheta())
+        sin_sum += np.sin(particle.getTheta())
+        
+    flen = len(particles_list)
+    if flen != 0:
+        x = x_sum / flen
+        y = y_sum / flen
+        theta = np.arctan2(sin_sum/flen, cos_sum/flen)
+    else:
+        x = x_sum
+        y = y_sum
+        theta = 0.0
+        
+    return Particle(x, y, theta)
+     
+def move(particle, delta_x, delta_y, delta_theta)
+        i.x += delta_x
+        i.y += delta_y
+        i.theta += delta_theta
+        
+def move_particle(particle, delta_x, delta_y, delta_theta):
+    """Move the particle by (delta_x, delta_y, delta_theta)"""
+    for i in particle:
+        i.x += delta_x
+        i.y += delta_y
+        i.theta += delta_theta
 
 
-def avoid_drive(obj_ids = [1]):
-    ex = ([1,0,0])
-    ez = ([0,0,1])
-    temp_frame = cam.get_next_frame()
-    corners, ids, rejected = cv2.aruco.detectMarkers(temp_frame, dict)
-    
-    if list(ids) not in obj_ids:
-        rvec, tvec, _ = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, camera_matrix, dist_coeffs)
-        dist = np.linalg.norm(tvec)
-        theta = np.arccos(np.dot((tvec/dist),ez))
-        signfunc = np.sign(np.dot(tvec,ex))
-        ang_deg = signfunc * np.rad2deg(theta)
-        sensa = arlo.read_right_ping_sensor()
-        sensb = arlo.read_left_ping_sensor()
-        print("Typen på a: ", type(sensa), " \n typen på b: ", type(sensb))
-        if 70 < ang_deg < 110 and sensa < dist+10 or sensb < dist+10: 
-            actions.turn_degrees(30, signfunc)
-            actions.forward_mm(dist)
-            actions.turn_degrees(-30, signfunc)
-            actions.forward_mm(dist)
-        elif sensa < dist+10 or sensb < dist+10:
-            print("KAN IKKE KØRE")
-        else: 
-            actions.turn_degrees(theta, -signfunc)
-            actions.forward_mm(dist)
-            actions.turn_degrees(theta, signfunc)
-            actions.forward_mm(dist)
+def add_uncertainty(particles_list, sigma, sigma_theta):
+    """Add some noise to each particle in the list. Sigma and sigma_theta is the noise
+    variances for position and angle noise."""
+    for particle in particles_list:
+        particle.x += rn.randn(0.0, sigma)
+        particle.y += rn.randn(0.0, sigma)
+        particle.theta = np.mod(particle.theta + rn.randn(0.0, sigma_theta), 2.0 * np.pi) 
 
-avoid_drive()
+
+def add_uncertainty_von_mises(particles_list, sigma, theta_kappa):
+    """Add some noise to each particle in the list. Sigma and theta_kappa is the noise
+    variances for position and angle noise."""
+    for particle in particles_list:
+        particle.x += rn.randn(0.0, sigma)
+        particle.y += rn.randn(0.0, sigma)
+        particle.theta = np.mod(rn.rand_von_mises(particle.theta, theta_kappa), 2.0 * np.pi) - np.pi
