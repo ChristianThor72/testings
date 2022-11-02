@@ -173,6 +173,7 @@ def find_pose(particles, cam, obj_ids):
                 scan_succes = scan_for_object(cam, dict, obj_ids)
                 break
             print("scanned done!!!")
+            print(scan_succes)
             
             sign = -1
             if scan_succes == 0: #0 is fail
