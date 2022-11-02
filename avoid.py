@@ -65,4 +65,34 @@ def avoid_drive(obj_ids = [1]):
             sleep(1)
             actions.forward_mm(dist)
 
-avoid_drive()
+#avoid_drive()
+
+
+def avoid():
+    arr = np.array([arlo.read_front_ping_sensor(),arlo.read_left_ping_sensor(),arlo.read_right_ping_sensor()])
+    if np.argmin(arr) == 0:
+        #Hvis den står foran
+        if np.argmin(arr) == 1:
+            # Hvis den står til højre
+            actions.turn_degrees(30, -1)
+            sleep(0.2)
+            actions.forward_mm(dist)
+        else:
+            # Hvis den står til højre
+            actions.turn_degrees(-30, 1)
+            sleep(0.2)
+            actions.forward_mm(dist)
+
+    if np.argmin(arr) == 1:
+         #hvis den står til venstre 
+        actions.turn_degrees(30, -1)
+        sleep(0.2)
+        actions.forward_mm(dist)
+    if np.argmin(arr) == 2:
+         # Hvis den står til højre
+        actions.turn_degrees(-30, 1)
+        sleep(0.2)
+        actions.forward_mm(dist)
+
+
+avoid()
