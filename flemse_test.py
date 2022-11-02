@@ -99,7 +99,7 @@ def go_to_box(status, current_id):
           
           if arlo.read_front_ping_sensor() <= safety_dist*1000:
              arlo.stop()
-             break
+             #break
 
 go_to_box(status1, 1)
 
