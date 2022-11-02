@@ -80,7 +80,7 @@ def go_to_box(status, current_id):
              arlo.stop()
              break
           if arlo.read_left_ping_sensor() <= safety_dist*1000:
-             print(arlo.read_right_ping_sensor())
+             print(arlo.read_left_ping_sensor())
              actions.turn_degrees(35, 1)
              sleep(1)
              actions.forward_m(0.5)
@@ -88,8 +88,8 @@ def go_to_box(status, current_id):
              actions.turn_degrees(35, -1)
              sleep(1)
              
-          if arlo.read_left_ping_sensor() <= safety_dist*1000:
-             print(arlo.read_left_ping_sensor())
+          if arlo.read_right_ping_sensor() <= safety_dist*1000:
+             print(arlo.read_right_ping_sensor())
              actions.turn_degrees(35, -1)
              sleep(1)
              actions.forward_m(0.5)
