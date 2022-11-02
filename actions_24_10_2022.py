@@ -186,8 +186,9 @@ def find_pose(particles, cam, obj_ids):
             
 
             if scan_succes == 0: #0 is fail
+                sleep(1)
                 drive_random()
-
+                sleep(5)
                
             
         elif corners:
