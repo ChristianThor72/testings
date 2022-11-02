@@ -180,13 +180,13 @@ def find_pose(particles, cam, obj_ids):
                 turn_degrees(90, sign)
                 sleep(1)
                 if arlo.read_front_ping_sensor() > 500:
-                    forward_mm(500, 70, 70)
+                    forward_mm(1500, 70, 70)
                 else:
                     sign = 1
                     turn_degrees(180, sign)
                     sleep(1)
                     if arlo.read_front_ping_sensor() > 500:
-                        forward_mm(500, 70, 70)
+                        forward_mm(1500, 70, 70)
                     #else:
                     #    drive_random(100)
                 sleep(1)
