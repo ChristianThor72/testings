@@ -82,15 +82,15 @@ while not finished:
                break
          
          #Check if it is close to id 1
-         sleep(2.5)
+         sleep(1)
          actions.backward_m(0.7)
-         sleep(2)
+         sleep(1)
          status1 = am_i_close(cam, 1)
          current_id = 1
          if not status1:
-             sleep(2.5)
+             sleep(1)
              actions.backward_m(0.25)
-             sleep(2)
+             sleep(1)
              status1 = am_i_close(cam, 1) 
          
          if status1:
@@ -135,14 +135,14 @@ while not finished:
             break
       
       #Check if it is close to id 2
-      sleep(2.5)
+      sleep(1)
       actions.backward_m(0.7)
-      sleep(2)
+      sleep(1)
       status2 = am_i_close(cam, 2)
       if not status2:
-          sleep(2.5)
+          sleep(1)
           actions.backward_m(0.25)
-          sleep(2)
+          sleep(1)
           status2 = am_i_close(cam, 2)  
       
       current_id = 2
@@ -185,15 +185,15 @@ while not finished:
             break
       
       #Check if it is close to id 2
-      sleep(2.5)
+      sleep(1)
       actions.backward_m(0.7)
-      sleep(2)
+      sleep(1)
       status3 = am_i_close(cam, 3)
       current_id = 3
       if not status3:
-          sleep(2.5)
+          sleep(1)
           actions.backward_m(0.25)
-          sleep(2)
+          sleep(1)
           status3 = am_i_close(cam, 3) 
       
       if status3:
@@ -233,15 +233,15 @@ while not finished:
             break
       
       #Check if it is close to id 2
-      sleep(2.5)
+      sleep(1)
       actions.backward_m(0.7)
-      sleep(2)
+      sleep(1)
       status4 = am_i_close(cam, 4)
       current_id = 4
       if not status4:
-          sleep(2.5)
+          sleep(1)
           actions.backward_m(0.25)
-          sleep(2)
+          sleep(1)
           status4 = am_i_close(cam, 4) 
       if status4:
          est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
@@ -280,15 +280,15 @@ while not finished:
             break
       
       #Check if it is close to id 2
-      sleep(2.5)
+      sleep(1)
       actions.backward_m(0.7)
-      sleep(2)
+      sleep(1)
       status5 = am_i_close(cam, 1)
       current_id = 1
       if not status5:
-          sleep(2.5)
+          sleep(1)
           actions.backward_m(0.25)
-          sleep(2)
+          sleep(1)
           status5 = am_i_close(cam, 1) 
           
       if status5:
