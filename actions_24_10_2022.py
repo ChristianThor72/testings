@@ -96,11 +96,10 @@ def scan_for_object(cam,dict, obj_ids):
             turn_degrees(ang_deg, signfunc)
             sleep(0.5)
             arlo.stop()
+            return 1
             break
         arlo.stop()
-    if corners and obj_ids in ids:
-        return 1
-    else:
+    if not corners:
         return 0
         
 def get_corners_ids(obj_ids, corners, ids):
