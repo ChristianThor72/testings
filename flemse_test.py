@@ -99,7 +99,7 @@ def go_to_box(status, current_id):
              arlo.stop()
              break
 
-
+go_to_box(status1, 1)
 
 
 
