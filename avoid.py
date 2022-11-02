@@ -43,12 +43,14 @@ def avoid_drive(obj_ids = [1]):
         theta = np.arccos(np.dot((tvec/dist),ez))
         signfunc = np.sign(np.dot(tvec,ex))
         ang_deg = signfunc * np.rad2deg(theta)
-        if 82 < ang_deg < 98 and arlo.read_left_ping_sensor or arlo.read_back_ping_sensor < dist+10: 
+        sensa = arlo.read_back_ping_sensor 
+        sensb = arlo.read_left_ping_sensor
+        if 82 < ang_deg < 98 and sensa or sensb < dist+10: 
             actions.turn_degrees(30, signfunc)
             actions.forward_mm(dist)
             actions.turn_degrees(-30, signfunc)
             actions.forward_mm(dist)
-        elif arlo.read_left_ping_sensor or arlo.read_back_ping_sensor < dist+10:
+        elif sensa or sensb < dist+10:
             print("KAN IKKE KØRE")
         else: 
             actions.turn_degrees(theta, -signfunc)
