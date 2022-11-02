@@ -61,10 +61,7 @@ def estimate_pose(particles_list):
         
     return Particle(x, y, theta)
      
-def move(particle, delta_x, delta_y, delta_theta)
-        i.x += delta_x
-        i.y += delta_y
-        i.theta += delta_theta
+
         
 def move_particle(particle, delta_x, delta_y, delta_theta):
     """Move the particle by (delta_x, delta_y, delta_theta)"""
