@@ -185,10 +185,11 @@ def find_pose(particles, cam, obj_ids):
                         forward_mm(500, 70, 70)
                     #else:
                     #    drive_random(100)
+            sleep(1)
             if sign == 1:
-                turn_degrees(180, -sign)
+                turn_degrees(90, -sign)
             elif sign == -1:
-                turn_degrees(180, -sign)
+                turn_degrees(90, -sign)
                
             
         elif corners:
