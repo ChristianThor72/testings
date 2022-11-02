@@ -202,7 +202,7 @@ def find_pose(particles, cam, obj_ids):
                 sleep(5)
                
             
-        elif corners:
+        elif corners and obj_ids in ids:
             if scan_succes ==-1:
                 
                 temp_corners = []
@@ -212,14 +212,14 @@ def find_pose(particles, cam, obj_ids):
                             temp_corners.append(corners[i])
                             dist, _, _ = detector(corners[i], markerLength, camera_matrix, dist_coeffs)
                             dists.append(dist)
+                
                 dists = np.array(dists)
                 print("DISTANCER: ", dists)
                 index = np.argmin(dists)
                 corners = temp_corners[index]
-                    
+                         
             theta, x, y, parties = sls.self_locate(cam, frameReference, particles)  
             particles = parties
             pose = [x, y, theta]
             return pose, particles, dists[index]
-            break
         
