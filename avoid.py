@@ -17,7 +17,7 @@ import sys
 
 cam = Camera(0, robottype = 'arlo', useCaptureThread = True)
 
-Dict, camera_matrix, dist_coeffs, markerLength = params()
+dict, camera_matrix, dist_coeffs, markerLength = params()
 arlo = robot.Robot()
 sleep(0.02)
 
@@ -31,20 +31,19 @@ landmarks = {
 }
 
 
-def avoid_drive():
+def avoid_drive(obj_ids = [1]):
 
     temp_frame = cam.get_next_frame()
     corners, ids, rejected = cv2.aruco.detectMarkers(temp_frame, dict)
-    forward_m(1)
+    
     if ids not in obj_ids:
         rvec, tvec, _ = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, camera_matrix, dist_coeffs)
         dist = np.linalg.norm(tvec)
         theta = np.arccos(np.dot((tvec/dist),ez))
         signfunc = np.sign(np.dot(tvec,ex))
         ang_deg = signfunc * np.rad2deg(theta)
-        turn_degrees(theta, -signfunc)
-        forward_m(dist+0.10)
-        turn_degrees(theta, signfunc, leftSpeed = 60 , rightSpeed = 60)
-
+        actions.turn_degrees(theta, -signfunc)
+        actions.turn_degrees(theta, signfunc, leftSpeed = 60 , rightSpeed = 60)
+        actions.forward_m(dist+0.10)
 
 avoid_drive()
