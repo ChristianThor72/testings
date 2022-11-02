@@ -32,11 +32,12 @@ landmarks = {
 
 
 def avoid_drive(obj_ids = [1]):
-
+    ex = ([1,0,0])
+    ez = ([0,0,1])
     temp_frame = cam.get_next_frame()
     corners, ids, rejected = cv2.aruco.detectMarkers(temp_frame, dict)
     
-    if ids not in obj_ids:
+    if list(ids) not in obj_ids:
         rvec, tvec, _ = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, camera_matrix, dist_coeffs)
         dist = np.linalg.norm(tvec)
         theta = np.arccos(np.dot((tvec/dist),ez))
