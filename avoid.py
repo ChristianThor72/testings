@@ -46,7 +46,7 @@ def avoid_drive(obj_ids = [1]):
         sensa = arlo.read_right_ping_sensor()
         sensb = arlo.read_left_ping_sensor()
         print("Typen på a: ", type(sensa), " \n typen på b: ", type(sensb))
-        if 82 < ang_deg < 98 and sensa < dist+10 or sensb < dist+10: 
+        if 70 < ang_deg < 110 and sensa < dist+10 or sensb < dist+10: 
             actions.turn_degrees(30, signfunc)
             actions.forward_mm(dist)
             actions.turn_degrees(-30, signfunc)
@@ -56,7 +56,7 @@ def avoid_drive(obj_ids = [1]):
         else: 
             actions.turn_degrees(theta, -signfunc)
             actions.forward_mm(dist)
-            actions.turn_degrees(theta, signfunc, leftSpeed = 60 , rightSpeed = 60)
+            actions.turn_degrees(theta, signfunc)
             actions.forward_mm(dist)
 
 avoid_drive()
