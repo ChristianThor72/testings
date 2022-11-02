@@ -98,7 +98,7 @@ def scan_for_object(cam,dict, obj_ids):
             arlo.stop()
             break
         arlo.stop()
-    if corners:
+    if corners and obj_ids in ids:
         return 1
     else:
         return 0
