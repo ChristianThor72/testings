@@ -132,6 +132,12 @@ while not finished:
       actions.backward_m(0.7)
       sleep(2)
       status2 = am_i_close(cam, 2)
+      if not status2:
+          sleep(2.5)
+          actions.backward_m(0.25)
+          sleep(2)
+          status2 = am_i_close(cam, 2)  
+      
       current_id = 2
       if status2:
          est_pose, particles, cam_dists = find_pose(particles, cam, current_id)
@@ -177,6 +183,12 @@ while not finished:
       sleep(2)
       status3 = am_i_close(cam, 3)
       current_id = 3
+      if not status3:
+          sleep(2.5)
+          actions.backward_m(0.25)
+          sleep(2)
+          status3 = am_i_close(cam, 3) 
+      
       if status3:
          est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
          visited_landmarks.append(3)
@@ -219,6 +231,11 @@ while not finished:
       sleep(2)
       status4 = am_i_close(cam, 4)
       current_id = 4
+      if not status4:
+          sleep(2.5)
+          actions.backward_m(0.25)
+          sleep(2)
+          status4 = am_i_close(cam, 4) 
       if status4:
          est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
          visited_landmarks.append(4)
@@ -261,6 +278,12 @@ while not finished:
       sleep(2)
       status5 = am_i_close(cam, 1)
       current_id = 1
+      if not status5:
+          sleep(2.5)
+          actions.backward_m(0.25)
+          sleep(2)
+          status5 = am_i_close(cam, 1) 
+          
       if status5:
          est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
          visited_landmarks.append(1)
@@ -272,15 +295,6 @@ while not finished:
       
 print("We did it!!")
 
-"""
-      NUM_PARTICLES = 20000
-      particles = NUM_PARTICLES
-      pose, objects = find_pose()
-      if pose:
-         status = True
-         est_pose = pose
-      else: 
-         drive_random()
-"""
+
 
 
