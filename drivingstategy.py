@@ -12,6 +12,7 @@ from camera import Camera
 from particle import move_particle
 from Parameters import params
 import time
+import sys
 
 arlo = robot.Robot()
 cam = Camera(0, robottype = 'arlo', useCaptureThread = True)
@@ -301,6 +302,5 @@ while not finished:
       
 print("We did it!!")
 
-
-
+sys.exit()
 
