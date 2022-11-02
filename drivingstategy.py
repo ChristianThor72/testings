@@ -31,8 +31,7 @@ landmarks = {
     4: (400.0, 300.0)
 }
 #temp
-def drive_random():
-   return 0
+
 
 visited_landmarks =  []
 scanned_landmarks = []
@@ -73,7 +72,7 @@ def driving_to_box(current_id, status):
             break
          if not (arlo.read_front_ping_sensor() >= safety_dist*1000+5 
             and arlo.read_left_ping_sensor() >= safety_dist*1000+5 
-            and arlo.read_right_ping_sensor() >= safety_dist**1000+5):
+            and arlo.read_right_ping_sensor() >= safety_dist*1000+5):
             arlo.stop()
             break
       
