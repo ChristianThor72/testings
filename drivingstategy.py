@@ -70,7 +70,7 @@ while not finished:
          
          #Kører imod obejcted og tjekker hele tiden sensor
          print("DRIVING")
-         arlo.go_diff(69, 70, 1, 1)
+         arlo.go_diff(70, 70, 1, 1)
          while True:
             if (float(time.perf_counter()) - float(start_time)) > time_cap:
                arlo.stop()
@@ -123,7 +123,7 @@ while not finished:
       
       #Kører imod obejcted og tjekker hele tiden sensor
       print("DRIVING")
-      arlo.go_diff(69, 70, 1, 1)
+      arlo.go_diff(70, 70, 1, 1)
       while True:
          if (float(time.perf_counter()) - float(start_time)) > time_cap:
             arlo.stop()
@@ -173,7 +173,7 @@ while not finished:
       
       #Kører imod obejcted og tjekker hele tiden sensor
       print("DRIVING")
-      arlo.go_diff(69, 70, 1, 1)
+      arlo.go_diff(70, 70, 1, 1)
       while True:
          if (float(time.perf_counter()) - float(start_time)) > time_cap:
             arlo.stop()
@@ -221,7 +221,7 @@ while not finished:
       
       #Kører imod obejcted og tjekker hele tiden sensor
       print("DRIVING")
-      arlo.go_diff(69, 70, 1, 1)
+      arlo.go_diff(70, 70, 1, 1)
       while True:
          if (float(time.perf_counter()) - float(start_time)) > time_cap:
             arlo.stop()
@@ -268,7 +268,7 @@ while not finished:
       
       #Kører imod obejcted og tjekker hele tiden sensor
       print("DRIVING")
-      arlo.go_diff(69, 70, 1, 1)
+      arlo.go_diff(70, 70, 1, 1)
       while True:
          if (float(time.perf_counter()) - float(start_time)) > time_cap:
             arlo.stop()
