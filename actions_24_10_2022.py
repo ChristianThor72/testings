@@ -98,10 +98,10 @@ def scan_for_object(cam,dict, obj_ids):
             arlo.stop()
             break
         arlo.stop()
-        if corners:
-            return 1
-        else:
-            return 0
+    if corners:
+        return 1
+    else:
+        return 0
         
 def get_corners_ids(obj_ids, corners, ids):
     temp_corners = []
