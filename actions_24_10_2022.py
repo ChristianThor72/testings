@@ -74,7 +74,7 @@ def drive_to_object(dist_mm, ang, sign):
     
 
 def scan_for_object(cam,dict, obj_ids):
-    for _ in range(18):
+    for i in range(18):
         turn_degrees(20, 1) #Turning right
         sleep(1.5) #Sleep time it takes to turn 30 degrees.
         temp_frame = cam.get_next_frame()
@@ -98,9 +98,9 @@ def scan_for_object(cam,dict, obj_ids):
             arlo.stop()
             return 1
             break
+        elif i == 17:
+            return 0
         arlo.stop()
-    if not corners:
-        return 0
         
 def get_corners_ids(obj_ids, corners, ids):
     temp_corners = []
