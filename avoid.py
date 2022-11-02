@@ -42,9 +42,12 @@ def avoid_drive(obj_ids = [1]):
         dist = np.linalg.norm(tvec)
         theta = np.arccos(np.dot((tvec/dist),ez))
         signfunc = np.sign(np.dot(tvec,ex))
+        print("sign: ", signfunc)
         ang_deg = signfunc * np.rad2deg(theta)
         actions.turn_degrees(theta, -signfunc)
+        sleep(1)
         actions.turn_degrees(theta, signfunc, leftSpeed = 60 , rightSpeed = 60)
-        actions.forward_m(dist+0.10)
+        sleep(1)
+        actions.forward_mm(dist+0.10)
 
 avoid_drive()
