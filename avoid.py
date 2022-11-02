@@ -76,7 +76,7 @@ def avoid():
             # Hvis den står til højre
             actions.turn_degrees(30, -1)
             sleep(0.2)
-            actions.forward_mm(25)
+            actions.forward_mm(300)
         else:
             # Hvis den står til højre
             actions.turn_degrees(-30, 1)
@@ -87,12 +87,12 @@ def avoid():
          #hvis den står til venstre 
         actions.turn_degrees(30, -1)
         sleep(0.2)
-        actions.forward_mm(25)
+        actions.forward_mm(300)
     if np.argmin(arr) == 2:
          # Hvis den står til højre
         actions.turn_degrees(-30, 1)
         sleep(0.2)
-        actions.forward_mm(25)
+        actions.forward_mm(300)
 
 
 avoid()
