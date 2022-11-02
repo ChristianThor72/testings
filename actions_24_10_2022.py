@@ -158,7 +158,7 @@ def panic_mode(safety_dist):
 
 def drive_random():
 
-    safety_dist = 500
+    safety_dist = 100
     turn_degrees(random.randint(0, 360),1)
     sleep(1)
     final_dist = random.randint(750,2000)
