@@ -159,11 +159,17 @@ def panic_mode(safety_dist):
 def drive_random():
 
     safety_dist = 500
-    turn_degrees(random.randint(20, 340),1)
+    turn_degrees(random.randint(0, 360),1)
     sleep(1)
-    forward_mm(random.randint(750, 2000))
+    final_dist = random.randint(750*2000)
+    time_cap = 2.235 * ( float(final_dist*0.001) - safety_dist)
+    start_time = time.perf_counter()
+    arlo.go_diff()
     
     while True:
+        if (float(time.perf_counter()) - float(start_time)) > time_cap:
+            arlo.stop()
+            break
 
         if not (arlo.read_front_ping_sensor() >= safety_dist
         and arlo.read_left_ping_sensor() >= safety_dist
