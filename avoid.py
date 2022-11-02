@@ -15,6 +15,7 @@ import sys
 
 
 
+cam = Camera(0, robottype = 'arlo', useCaptureThread = True)
 
 Dict, camera_matrix, dist_coeffs, markerLength = params()
 arlo = robot.Robot()
