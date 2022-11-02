@@ -165,17 +165,18 @@ def drive_random():
     time_cap = 2.235 * ( float(final_dist*0.001) - safety_dist)
     start_time = time.perf_counter()
     arlo.go_diff(70, 70, 1, 1)
-    
+    print("Begynder at køre")
     while True:
         if (float(time.perf_counter()) - float(start_time)) > time_cap:
             arlo.stop()
             break
+
         if not (arlo.read_front_ping_sensor() >= safety_dist 
         and arlo.read_left_ping_sensor() >= safety_dist 
         and arlo.read_right_ping_sensor() >= safety_dist):
             arlo.stop()
             break  
-
+    print("Er færdig med at køre")
 def find_pose(particles, cam, obj_ids):
     while True:
         pose = None
