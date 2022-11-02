@@ -64,7 +64,7 @@ def go_to_box(status, current_id):
        dist_mm = np.sqrt((delta_x**2) + (delta_y**2))
        theta = 0 #vi forventer at vi kigger op kassen
     #     actions.drive_to_object(dist, 0, 1)
-       safety_dist = 0.2
+       safety_dist = 0.4
        start_time = time.perf_counter()
        final_dist = max(dist_mm, dist_cam)
        
