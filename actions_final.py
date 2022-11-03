@@ -210,11 +210,11 @@ def find_pose(particles, cam, obj_ids):
         frameReference = cam.get_next_frame()
         corners_temp, ids, _ = cv2.aruco.detectMarkers(frameReference, dict)
         corners, _ = cut_down_corners(corners_temp, ids, obj_ids)
-        print(ids)
+        #print(ids)
         #cv2.aruco.drawDetectedMarkers(frameReference,corners)
         scan_succes = -1
         #if no box is found or the same box is found
-        print(obj_ids not in ids)
+        print(corners)
         if not corners:
             print("first step")
             if obj_ids not in ids:  
