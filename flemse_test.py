@@ -97,7 +97,7 @@ def driving_to_box(current_id, status):
         status = am_i_close(cam, current_id)
         if not status:
             sleep(1)
-            actions.backward_m(0.25)
+            actions.backward_m(0.35)
             sleep(1)
             status = am_i_close(cam, current_id)  
         
