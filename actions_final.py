@@ -249,7 +249,7 @@ def find_pose(particles, cam, obj_ids):
                 index = np.argmin(dists)
                 corners = temp_corners[index]
                          
-            theta, x, y, parties = sls.self_locate(cam, frameReference, particles)  
+            theta, x, y, parties = sls.self_locate(cam, frameReference, obj_ids, particles)  
             particles = parties
             pose = [x, y, theta]
             return pose, particles, dists[index]
