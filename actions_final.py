@@ -197,7 +197,7 @@ def cut_down_corners(corners, ids, obj_ids):
         index = np.argmin(dists)
         corners = temp_corners[index]
         dist = dists[index]
-        return corners, dist
+        return np.array(corners), dist
     else:
         return None, 1e10    
     
