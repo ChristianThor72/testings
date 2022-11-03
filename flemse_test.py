@@ -79,12 +79,15 @@ def driving_to_box(current_id, status):
         
         #Søg efter object
         if not actions.object_in_site(cam, current_id):
+            print("cannot see object. Start scanning")
             _ = actions.scan_for_object(cam, dict, current_id)
         #Når den kan se objektet skal den følgende. 
-        if actions.object_in_site(cam, current_id):
+        elif actions.object_in_site(cam, current_id):
+            print("can see object")
             actions.drive_to_current_id(cam, time_cap, 350, current_id)
         #Hvis den ikke kan se objektet, kør i retning af det ud fra pose. 
         else:
+            print("going in direction of box")
             actions.going_in_direction_of_box(cam, current_id, est_pose, landmarks, safety_dist, time_cap = 5)
         
         #Check if it is close to id
