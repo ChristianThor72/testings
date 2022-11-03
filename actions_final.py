@@ -218,7 +218,7 @@ def find_pose(particles, cam, obj_ids):
             print("cannot see object")
             while scan_succes == -1:
                 scan_succes = scan_for_object(cam, dict, obj_ids)
-                return pose, particles, 0
+                return ([55., -0.6, 3.0]), particles, 0
                 break
             print(scan_succes)
                 
