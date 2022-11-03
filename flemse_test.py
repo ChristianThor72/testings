@@ -54,7 +54,7 @@ finished = False
 
 
 
-def driving_to_box(status, current_id):
+def driving_to_box(current_id, status):
     while not status:
         print(f"status {current_id}: ", status)
         particles = sls.initialize_particles(NUM_PARTICLES)
