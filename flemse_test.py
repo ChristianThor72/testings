@@ -78,7 +78,8 @@ def driving_to_box(current_id, status):
         
         
         #Søg efter object
-        _ = actions.scan_for_object(cam, dict, current_id)
+        if not actions.object_in_site(cam, current_id):
+            _ = actions.scan_for_object(cam, dict, current_id)
         #Når den kan se objektet skal den følgende. 
         if actions.object_in_site(cam, current_id):
             actions.drive_to_current_id(cam, time_cap, 350, current_id)
