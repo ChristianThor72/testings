@@ -14,7 +14,7 @@ try:
     from picamera.array import PiRGBArray
     piCameraFound = True
 except ImportError:
-    print("Camera.py: picamera module not available - using OpenCV interface instead")
+    #print("Camera.py: picamera module not available - using OpenCV interface instead")
 
 def isRunningOnArlo():
     """Return True if we are running on Arlo, otherwise False."""
@@ -87,7 +87,7 @@ class CaptureThread(threading.Thread):
                 retval, image = self.cam.read()  # Read frame
 
                 if not retval:  # Error
-                    print("CaptureThread: Could not read next frame")
+                    #print("CaptureThread: Could not read next frame")
                     exit(-1)
 
             # Update framebuffer
@@ -109,7 +109,7 @@ class Camera(object):
              robottype - specify which robot you are using in order to use the correct camera calibration. 
                          Supported types: arlo, frindo, scribbler, macbookpro"""
 
-        print("robottype =", robottype)
+        #print("robottype =", robottype)
         self.useCaptureThread = useCaptureThread
 
         # Set camera calibration info
@@ -158,7 +158,7 @@ class Camera(object):
             #       -5.7263071423202944e-03, 5.7422957803983802e-03, 5.9722099836744738e+00 ], dtype = np.float64)
             self.distortion_coeffs = np.asarray([0., 0., -1.6169374082976234e-02, 8.7657653170062459e-03, 0.], dtype = np.float64)
         else:
-            print("Camera.__init__: Unknown robot type")
+            #print("Camera.__init__: Unknown robot type")
             exit(-1)
             
 
@@ -184,13 +184,13 @@ class Camera(object):
             self.cam.exposure_mode = 'off'
 
 
-            print("shutter_speed = ", self.cam.shutter_speed)
-            print("awb_gains = ", self.cam.awb_gains)
+            #print("shutter_speed = ", self.cam.shutter_speed)
+            #print("awb_gains = ", self.cam.awb_gains)
             
             
-            print("Camera width = ", self.cam.resolution[0])
-            print("Camera height = ", self.cam.resolution[1])
-            print("Camera FPS = ", self.cam.framerate)
+            #print("Camera width = ", self.cam.resolution[0])
+            #print("Camera height = ", self.cam.resolution[1])
+            #print("Camera FPS = ", self.cam.framerate)
 
 
         else:  # Use OpenCV interface
@@ -204,13 +204,13 @@ class Camera(object):
                 # We try first the generic auto-detect interface
                 self.cam = cv2.VideoCapture(camidx)
                 if not self.cam.isOpened():  # Error
-                    print("Camera.__init__: Could not open camera")
+                    #print("Camera.__init__: Could not open camera")
                     exit(-1)
                 else:
-                    print("Camera.__init__: Using OpenCV with auto-detect interface")
+                    #print("Camera.__init__: Using OpenCV with auto-detect interface")
             else:
                 gstreamerCameraFound = True
-                print("Camera.__init__: Using OpenCV with gstreamer")
+                #print("Camera.__init__: Using OpenCV with gstreamer")
 
             time.sleep(1) # wait for camera
             
@@ -224,9 +224,9 @@ class Camera(object):
             time.sleep(1)
         
             # Get camera properties
-            print("Camera width = ", int(self.cam.get(capPropId("FRAME_WIDTH"))))
-            print("Camera height = ", int(self.cam.get(capPropId("FRAME_HEIGHT"))))
-            print("Camera FPS = ", int(self.cam.get(capPropId("FPS"))))
+            #print("Camera width = ", int(self.cam.get(capPropId("FRAME_WIDTH"))))
+            #print("Camera height = ", int(self.cam.get(capPropId("FRAME_HEIGHT"))))
+            #print("Camera FPS = ", int(self.cam.get(capPropId("FPS"))))
         
         # Initializing the camera distortion maps
         #self.mapx, self.mapy = cv2.initUndistortRectifyMap(self.intrinsic_matrix, self.distortion_coeffs, np.eye(3,3), np.eye(3,3), self.imageSize, cv2.CV_32FC1)
@@ -245,7 +245,7 @@ class Camera(object):
         
         # Initialize worker thread and framebuffer
         if self.useCaptureThread:
-            print("Using capture thread")
+            #print("Using capture thread")
             self.framebuffer = framebuffer.FrameBuffer()
             self.capturethread = CaptureThread(self.cam, self.framebuffer)
             self.capturethread.start()
@@ -266,7 +266,7 @@ class Camera(object):
 
     def get_colour(self):
         """OBSOLETE - use instead get_next_frame"""
-        print("OBSOLETE get_colour - use instead get_next_frame")
+        #print("OBSOLETE get_colour - use instead get_next_frame")
         return self.get_next_frame()
 
     def get_next_frame(self):
@@ -291,7 +291,7 @@ class Camera(object):
                 retval, img = self.cam.read()  # Read frame
 
                 if not retval:  # Error
-                    print("Camera.get_colour: Could not read next frame")
+                    #print("Camera.get_colour: Could not read next frame")
                     exit(-1)
         
         return img
@@ -459,7 +459,7 @@ class Camera(object):
 
 
 if (__name__=='__main__'):
-    print("Opening and initializing camera")
+    #print("Opening and initializing camera")
     
     #cam = Camera(0, 'macbookpro', useCaptureThread=True)
     #cam = Camera(0, 'macbookpro', useCaptureThread = False)
@@ -502,7 +502,7 @@ if (__name__=='__main__'):
         IDs, dists, angles = cam.detect_aruco_objects(colour)
         if not isinstance(IDs, type(None)):
             for i in range(len(IDs)):
-                print("Object ID = ", IDs[i], ", Distance = ", dists[i], ", angles = ", angles[i])
+                #print("Object ID = ", IDs[i], ", Distance = ", dists[i], ", angles = ", angles[i])
 
         # Draw detected objects
         cam.draw_aruco_objects(colour)
