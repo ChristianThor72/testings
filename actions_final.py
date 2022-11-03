@@ -218,12 +218,14 @@ def find_pose(particles, cam, obj_ids):
             print("cannot see object")
             while scan_succes == -1:
                 scan_succes = scan_for_object(cam, dict, obj_ids)
+                return pose, particles, 0
                 break
             print(scan_succes)
                 
     
             if scan_succes == 0: #0 is fail
                 sleep(2)
+                return pose, particles, 0
                 break
                    
             
