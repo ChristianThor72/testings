@@ -81,6 +81,7 @@ def driving_to_box(current_id, status):
         if not actions.object_in_site(cam, current_id):
             print("cannot see object. Start scanning")
             scan_val = actions.scan_for_object(cam, dict, current_id)
+            print(scan_val)
             if scan_val == 0:
                 print("going in direction of box")
                 actions.going_in_direction_of_box(cam, current_id, est_pose, landmarks, safety_dist, time_cap = 5)   

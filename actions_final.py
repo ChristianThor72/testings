@@ -224,7 +224,7 @@ def find_pose(particles, cam, obj_ids):
     
             if scan_succes == 0: #0 is fail
                 sleep(1)
-                drive_random()
+                #drive_random()
                 sleep(5)
                    
             
@@ -333,7 +333,8 @@ def object_in_site(cam, current_id):
 #If we cant see the next box, assuming we have scanned for object. 
 def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, time_cap = 5):
     #Scan for object we just have seen as we want to face it again to be sure of our direction. 
-    #We havent moved so should not be a problem. 
+    #We havent moved so should not be a problem.
+    print("scan")
     _ = scan_for_object(cam, dict, current_id-1)
     #Turn towards the next object.
     print(pose)
