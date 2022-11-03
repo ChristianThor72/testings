@@ -240,8 +240,8 @@ def find_pose(particles, cam, obj_ids):
                 dists = []
                 for i in range(len(ids)):
                     if ids[i] == obj_ids:
-                            temp_corners.append(corners[i])
-                            dist, _, _ = detector(corners[i], markerLength, camera_matrix, dist_coeffs)
+                            temp_corners.append(corners_temp[i])
+                            dist, _, _ = detector(corners_temp[i], markerLength, camera_matrix, dist_coeffs)
                             dists.append(dist)
                 
                 dists = np.array(dists)
