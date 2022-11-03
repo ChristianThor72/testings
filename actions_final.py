@@ -299,7 +299,7 @@ def drive_to_current_id(cam, time_cap, safety_dist, current_id):
             
         if arlo.read_front_ping_sensor() <= safety_dist+100:
             arlo.stop()
-            #break
+            break
 
 
 def turn_towards_next_box(pose, current_id, landmarks):
