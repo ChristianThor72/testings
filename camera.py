@@ -14,7 +14,7 @@ try:
     from picamera.array import PiRGBArray
     piCameraFound = True
 except ImportError:
-    #print("Camera.py: picamera module not available - using OpenCV interface instead")
+    print("Camera.py: picamera module not available - using OpenCV interface instead")
 
 def isRunningOnArlo():
     """Return True if we are running on Arlo, otherwise False."""
@@ -87,7 +87,7 @@ class CaptureThread(threading.Thread):
                 retval, image = self.cam.read()  # Read frame
 
                 if not retval:  # Error
-                    #print("CaptureThread: Could not read next frame")
+                    print("CaptureThread: Could not read next frame")
                     exit(-1)
 
             # Update framebuffer
@@ -207,7 +207,7 @@ class Camera(object):
                     #print("Camera.__init__: Could not open camera")
                     exit(-1)
                 else:
-                    #print("Camera.__init__: Using OpenCV with auto-detect interface")
+                    print("Camera.__init__: Using OpenCV with auto-detect interface")
             else:
                 gstreamerCameraFound = True
                 #print("Camera.__init__: Using OpenCV with gstreamer")
@@ -502,7 +502,7 @@ if (__name__=='__main__'):
         IDs, dists, angles = cam.detect_aruco_objects(colour)
         if not isinstance(IDs, type(None)):
             for i in range(len(IDs)):
-                #print("Object ID = ", IDs[i], ", Distance = ", dists[i], ", angles = ", angles[i])
+                print("Object ID = ", IDs[i], ", Distance = ", dists[i], ", angles = ", angles[i])
 
         # Draw detected objects
         cam.draw_aruco_objects(colour)
