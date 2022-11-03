@@ -215,7 +215,7 @@ def find_pose(particles, cam, obj_ids):
         scan_succes = -1
         #if no box is found or the same box is found
         print(corners)
-        corners = np.array(corners)
+        corners = np.array([corners])
         if not corners:
             print("first step")
             if obj_ids not in ids:  
