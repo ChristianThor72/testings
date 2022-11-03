@@ -336,6 +336,7 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
     #We havent moved so should not be a problem. 
     _ = scan_for_object(cam, dict, current_id-1)
     #Turn towards the next object.
+    print(pose)
     turn_towards_next_box(pose, current_id, landmarks)
     
     while True:    
