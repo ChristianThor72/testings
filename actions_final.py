@@ -75,8 +75,8 @@ def drive_to_object(dist_mm, ang, sign):
     
 
 def scan_for_object(cam, dict, obj_ids):
-    for i in range(18):
-        turn_degrees(30, 1) #Turning right
+    for i in range(30):
+        turn_degrees(20, 1) #Turning right
         sleep(1.5) #Sleep time it takes to turn 30 degrees.
         temp_frame = cam.get_next_frame()
         corners, ids, rejected = cv2.aruco.detectMarkers(temp_frame, dict)
