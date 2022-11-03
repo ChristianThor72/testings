@@ -215,19 +215,20 @@ def find_pose(particles, cam, obj_ids):
         scan_succes = -1
         #if no box is found or the same box is found
         print(obj_ids not in ids)
-        if not corners or obj_ids not in ids:  
-            while scan_succes == -1:
-                scan_succes = scan_for_object(cam, dict, obj_ids)
-                break
-            print("scanned done!!!")
-            print(scan_succes)
-            
-
-            if scan_succes == 0: #0 is fail
-                sleep(1)
-                drive_random()
-                sleep(5)
-               
+        if not corners:
+            if obj_ids not in ids:  
+                while scan_succes == -1:
+                    scan_succes = scan_for_object(cam, dict, obj_ids)
+                    break
+                print("scanned done!!!")
+                print(scan_succes)
+                
+    
+                if scan_succes == 0: #0 is fail
+                    sleep(1)
+                    drive_random()
+                    sleep(5)
+                   
             
         elif corners and obj_ids in ids:
             if scan_succes ==-1:
