@@ -182,6 +182,25 @@ def drive_random():
             arlo.stop()
             break  
     print("Er færdig med at køre")
+
+def cut_down_corners(corners, ids, obj_ids):
+    temp_corners = []
+    dists = []
+    if corners and obj_ids in ids:
+        for i in range(len(ids)):
+            if ids[i] == obj_ids:
+                temp_corners.append(corners[i])
+                dist, _, _ = detector(corners[i], markerLength, camera_matrix, dist_coeffs)
+                dists.append(dist)
+        dists = np.array(dists)
+        print("DISTANCER: ", dists)
+        index = np.argmin(dists)
+        corners = temp_corners[index]
+        dist = dists[index]
+        return corners, dist
+    else:
+        return None, 1e10    
+    
 def find_pose(particles, cam, obj_ids):
     while True:
         pose = None
@@ -233,23 +252,6 @@ def find_pose(particles, cam, obj_ids):
 
 
 
-def cut_down_corners(corners, ids, obj_ids):
-    temp_corners = []
-    dists = []
-    if corners and obj_ids in ids:
-        for i in range(len(ids)):
-            if ids[i] == obj_ids:
-                temp_corners.append(corners[i])
-                dist, _, _ = detector(corners[i], markerLength, camera_matrix, dist_coeffs)
-                dists.append(dist)
-        dists = np.array(dists)
-        print("DISTANCER: ", dists)
-        index = np.argmin(dists)
-        corners = temp_corners[index]
-        dist = dists[index]
-        return corners, dist
-    else:
-        return None, 1e10
 
 def am_i_close(cam, obj_ids):
     temp_frame = cam.get_next_frame()
