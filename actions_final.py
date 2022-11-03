@@ -216,6 +216,7 @@ def find_pose(particles, cam, obj_ids):
         #if no box is found or the same box is found
         print(obj_ids not in ids)
         if not corners:
+            print("first step")
             if obj_ids not in ids:  
                 while scan_succes == -1:
                     scan_succes = scan_for_object(cam, dict, obj_ids)
