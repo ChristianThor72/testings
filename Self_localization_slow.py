@@ -260,7 +260,7 @@ def self_locate(cam, frameReference, init_poses = []):
                 box_x = landmarks[int(objectIDs[0])][0] #x koordinat for kassen der er observeret
                 box_y = landmarks[int(objectIDs[0])][1]#y koordinat for kassen der er observeret
                 dist = dists[0] #distance kassen er observeret fra
-                box_theta = angles[0]
+                #box_theta = angles[0]
 
                 for elm in (particles):
                     delta_x, delta_y =  box_x - elm.getX(), box_y - elm.getY() #forskellen på partikel og koordinat for den observerede kasse   
