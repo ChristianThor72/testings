@@ -217,7 +217,7 @@ def find_pose(particles, cam, obj_ids):
         print(corners_temp)
         print()
         print(corners)
-        if not (corners):
+        if not corners_temp:
             print("first step")
             if obj_ids not in ids:  
                 while scan_succes == -1:
@@ -233,7 +233,7 @@ def find_pose(particles, cam, obj_ids):
                     sleep(5)
                    
             
-        elif corners and obj_ids in ids:
+        elif corners_temp and obj_ids in ids:
             if scan_succes ==-1:
                 
                 temp_corners = []
