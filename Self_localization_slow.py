@@ -153,7 +153,7 @@ def draw_aruco_objects(ids, img, corners, intrinsic_matrix, distortion_coeffs, r
 
 
 # Main program #
-def self_locate(cam, frameReference, init_poses = []):
+def self_locate(cam, frameReference, current_id, init_poses = []):
     
     try:
         if showGUI:
@@ -257,8 +257,8 @@ def self_locate(cam, frameReference, init_poses = []):
                 sigma_theta = 0.15
                 sum_of_weights = 0
                 #print(objectIDs[0])
-                box_x = landmarks[int(objectIDs[0])][0] #x koordinat for kassen der er observeret
-                box_y = landmarks[int(objectIDs[0])][1]#y koordinat for kassen der er observeret
+                box_x = landmarks[current_id][0] #x koordinat for kassen der er observeret
+                box_y = landmarks[current_id][1]#y koordinat for kassen der er observeret
                 dist = dists[0] #distance kassen er observeret fra
                 #box_theta = angles[0]
 
