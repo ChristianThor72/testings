@@ -197,7 +197,7 @@ def cut_down_corners(corners, ids, obj_ids):
         index = np.argmin(dists)
         corners = temp_corners[index]
         dist = dists[index]
-        return np.array(corners), dist
+        return corners, dist
     else:
         return None, 1e10    
     
@@ -217,7 +217,7 @@ def find_pose(particles, cam, obj_ids):
         print(corners_temp)
         print()
         print(corners)
-        if not corners_temp:
+        if not (corners):
             print("first step")
             if obj_ids not in ids:  
                 while scan_succes == -1:
