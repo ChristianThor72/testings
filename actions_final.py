@@ -99,7 +99,7 @@ def scan_for_object(cam, dict, obj_ids):
             arlo.stop()
             return 1
             break
-        elif i == 17:
+        elif i == 29:
             return 0
         arlo.stop()
         
