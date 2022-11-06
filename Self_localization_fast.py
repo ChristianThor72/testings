@@ -18,6 +18,8 @@ from timeit import default_timer as timer
 import sys
 from camera import Camera
 from time import sleep
+import random_numbers as rn
+
 num_particles = 20000
 
 # Flags
