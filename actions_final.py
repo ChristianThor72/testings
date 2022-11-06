@@ -263,7 +263,7 @@ def drive_to_current_id(cam, time_cap, safety_dist, current_id):
             sleep(1)
             correct_angle(cam, current_id)
             sleep(0.5)
-            time_cap += 4
+            time_cap += 5.0
             print("Adding time")
 
         if arlo.read_right_ping_sensor() <= safety_dist:
@@ -276,7 +276,7 @@ def drive_to_current_id(cam, time_cap, safety_dist, current_id):
             sleep(1)
             correct_angle(cam, current_id)
             sleep(0.5)
-            time_cap += 4
+            time_cap += 5.0
             print("Adding time")
             
         if arlo.read_front_ping_sensor() <= safety_dist+100:
