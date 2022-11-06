@@ -289,6 +289,10 @@ def turn_towards_next_box(pose, current_id, landmarks):
     if delta_y < 0:
         theta_corr = 2*np.pi - theta_corr
     theta_new = (theta0-theta_corr)*180/np.pi
+    print("Theta pose: ", theta0*180/np.pi )
+    print("Theta correction: ", theta_corr)
+    print("Theta", theta_new)
+    
     return theta_new
 
 
@@ -313,7 +317,6 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
     #Turn towards the next object.
     print(pose)
     theta = turn_towards_next_box(pose, current_id, landmarks)
-    print("Theta", theta)
     turn_degrees(theta, -1)
     sleep(3)
     while True:    
