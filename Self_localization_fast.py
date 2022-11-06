@@ -19,7 +19,7 @@ import sys
 from camera import Camera
 from time import sleep
 
-
+num_particles = 20000
 # Flags
 showGUI = False  # Whether or not to open GUI windows
 onRobot = True # Whether or not we are running on the Arlo robot
