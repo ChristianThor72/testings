@@ -99,10 +99,10 @@ def add_uncertainty(particles_list, sigma, sigma_theta):
 def est_poses(particles_list):
     """Estimate the pose from particles by computing the average position and orientation over all particles. 
     This is not done using the particle weights, but just the sample distribution."""
-    x_sum = np.sum([parts[:,0]])
-    y_sum = np.sum([parts[:,1]])
-    cos_sum = np.sum([parts[:,2]])
-    sin_sum = np.sum([parts[:,3]])
+    x_sum = np.sum([particles_list[:,0]])
+    y_sum = np.sum([particles_list[:,1]])
+    cos_sum = np.sum([particles_list[:,2]])
+    sin_sum = np.sum([particles_list[:,3]])
     arr = np.empty((num_particles,4))
         
     flen = len(particles_list)
