@@ -203,7 +203,7 @@ def cut_down_corners(corners, ids, obj_ids):
         return None, 1e10    
     
 def find_pose(particles, cam, obj_ids):
-
+    
     while True:
         pose = None
         found_id = False
@@ -215,30 +215,34 @@ def find_pose(particles, cam, obj_ids):
         #cv2.aruco.drawDetectedMarkers(frameReference,corners)
         scan_succes = -1
         #if no box is found or the same box is found
-        if not corners_temp or obj_ids not in ids:  
-            print("cannot see object")
-            while scan_succes == -1:
-                scan_succes = scan_for_object(cam, dict, obj_ids)
-                return ([55., -0.6, 3.0]), particles, 0
-                break
-            print(scan_succes)
+        print(corners_temp)
+        print()
+        print(corners)
+        if not corners:
+            print("first step")
+            if obj_ids not in ids:  
+                while scan_succes == -1:
+                    scan_succes = scan_for_object(cam, dict, obj_ids)
+                    break
+                print("scanned done!!!")
+                print(scan_succes)
                 
     
-            if scan_succes == 0: #0 is fail
-                sleep(2)
-                return pose, particles, 0
-                break
+                if scan_succes == 0: #0 is fail
+                    sleep(1)
+                    drive_random()
+                    sleep(5)
                    
             
-        elif corners_temp and obj_ids in ids:
+        elif corners and obj_ids in ids:
             if scan_succes ==-1:
                 
                 temp_corners = []
                 dists = []
                 for i in range(len(ids)):
                     if ids[i] == obj_ids:
-                            temp_corners.append(corners_temp[i])
-                            dist, _, _ = detector(corners_temp[i], markerLength, camera_matrix, dist_coeffs)
+                            temp_corners.append(corners[i])
+                            dist, _, _ = detector(corners[i], markerLength, camera_matrix, dist_coeffs)
                             dists.append(dist)
                 
                 dists = np.array(dists)
@@ -246,15 +250,10 @@ def find_pose(particles, cam, obj_ids):
                 index = np.argmin(dists)
                 corners = temp_corners[index]
                          
-            theta, x, y, parties = sls.self_locate(cam, frameReference, obj_ids, particles)  
+            theta, x, y, parties = sls.self_locate(cam, frameReference, particles)  
             particles = parties
             pose = [x, y, theta]
             return pose, particles, dists[index]
-        
-        
-
-
-
 
 
 def am_i_close(cam, obj_ids):
