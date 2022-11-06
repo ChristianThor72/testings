@@ -295,11 +295,11 @@ def turn_towards_next_box(pose, current_id, landmarks):
         drive_random()
     if current_id == 3:
         if delta_y < 0:
-            theta_corr =  theta_corr - np.pi
+            theta_corr =  theta_corr - 2*np.pi
     if current_id == 4:
         theta_corr = theta_corr - (np.pi * 1.5)
     if current_id == 1:
-        theta_corr =  theta_corr - 135
+        theta_corr =  theta_corr - (135 / 180) * np.pi
         
         
         
