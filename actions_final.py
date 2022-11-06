@@ -312,7 +312,8 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
     _ = scan_for_object(cam, dict, current_id-1)
     #Turn towards the next object.
     print(pose)
-    turn_towards_next_box(pose, current_id, landmarks)
+    theta = turn_towards_next_box(pose, current_id, landmarks)
+    turn_degrees(theta, -1)
     sleep(3)
     while True:    
         #Drive towards the next object even though we cant see it. 
