@@ -53,7 +53,7 @@ status5 = False
 finished = False
 
 
-
+est_pose_global = []
 def driving_to_box(current_id, status):
     while not status:
         print(f"status {current_id}: ", status)
@@ -88,7 +88,8 @@ def driving_to_box(current_id, status):
                 actions.backward_m(0.35)
                 sleep(1)
                 status = am_i_close(cam, current_id)                             
-
+            est_pose_global = est_pose
+            
         #Søg efter object
         print("Object in site2", actions.object_in_site(cam, current_id))
         if not actions.object_in_site(cam, current_id):
