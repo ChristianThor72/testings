@@ -60,8 +60,6 @@ def driving_to_box(current_id, status):
         particles = sls.initialize_particles(NUM_PARTICLES)
         
         est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
-        print("this is my est_pose", est_pose)
-        print("did pose")
         delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
         delta_y = landmarks[current_id][1]*10 - est_pose[1]*10
         dist_mm = np.sqrt((delta_x**2) + (delta_y**2))
@@ -77,7 +75,6 @@ def driving_to_box(current_id, status):
         print("DRIVING")
         #arlo.go_diff(70, 70, 1, 1)
         
-        print("her")
         #Søg efter object
         if not actions.object_in_site(cam, current_id):
             print("cannot see object. Start scanning")
@@ -86,15 +83,14 @@ def driving_to_box(current_id, status):
             if scan_val == 0:
                 print("going in direction of box")
                 actions.going_in_direction_of_box(cam, current_id, est_pose, landmarks, safety_dist, time_cap = 5)   
+                
         #Når den kan se objektet skal den følgende. 
         elif actions.object_in_site(cam, current_id):
             print("can see object!!!")
             actions.drive_to_current_id(cam, time_cap, 350, current_id)
         #Hvis den ikke kan se objektet, kør i retning af det ud fra pose. 
-        else:
-            print("going in direction of box")
-            actions.going_in_direction_of_box(cam, current_id, est_pose, landmarks, safety_dist, time_cap = 5)
-        print("efter")
+        
+        
         #Check if it is close to id
         sleep(1)
         actions.backward_m(0.7)
