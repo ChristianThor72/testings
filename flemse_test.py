@@ -98,7 +98,7 @@ def driving_to_box(current_id, status, est_pose_global):
             print(scan_val)
             if scan_val == 0:
                 print("going in direction of box")
-                actions.going_in_direction_of_box(cam, current_id, est_pose_global[0], landmarks, safety_dist, time_cap = 5)   
+                actions.going_in_direction_of_box(cam, current_id, est_pose_global[0], landmarks, safety_dist, time_cap = 1)   
                 
         #Når den kan se objektet skal den følgende. 
 
