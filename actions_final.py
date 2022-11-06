@@ -302,13 +302,12 @@ def turn_towards_next_box(pose, current_id, landmarks):
         theta_corr =  theta_corr - np.pi
         
         
-        
     theta_new = (theta0+theta_corr)*180/np.pi
     print("Theta pose: ", theta0*180/np.pi )
     print("Theta correction: ", theta_corr)
     print("Theta", theta_new)
     
-    return theta_new
+    return abs(theta_new)
 
 
 def object_in_site(cam, current_id):
