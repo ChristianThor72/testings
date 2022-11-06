@@ -25,7 +25,7 @@ def backward_m(m, leftSpeed = 69, rightSpeed = 70):
             print(arlo.stop())
             break  
 
-def forward_m(m, leftSpeed = 69, rightSpeed = 70):
+def forward_m(m, leftSpeed = 70, rightSpeed = 70):
     start_time = time.perf_counter()
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
     while True:
@@ -33,7 +33,7 @@ def forward_m(m, leftSpeed = 69, rightSpeed = 70):
             print(arlo.stop())
             break  
 
-def forward_mm(m, leftSpeed = 69, rightSpeed = 70):
+def forward_mm(m, leftSpeed = 70, rightSpeed = 70):
     forward_m(m*0.001)
 
 
