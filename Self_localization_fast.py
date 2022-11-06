@@ -297,7 +297,7 @@ def self_locate(cam, frameReference, current_id, init_poses = []):
         
             
 
-        return est_poses[2],est_poses[0], est_poses[1], particles
+        return est_pose[2],est_pose[0], est_pose[1], particles
         
     
         #est_pose.getTheta(), est_pose.getX(), est_pose.getY(), particles
