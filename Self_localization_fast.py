@@ -257,7 +257,7 @@ def self_locate(cam, frameReference, current_id, init_poses = []):
                 probabilities = []    
                 
                 for elm in particles:
-                    probabilities.append(elm[3]()/sum_of_weights)
+                    probabilities.append(elm[3]/sum_of_weights)
                     elm[3] = (elm[3]/sum_of_weights)
                     #elm.setWeight(elm.getWeight()/sum_of_weights)
                     #print("probability: ", elm.getWeight())
