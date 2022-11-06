@@ -53,7 +53,7 @@ status5 = False
 finished = False
 
 
-est_pose_global = []
+est_pose_global = [0]
 def driving_to_box(current_id, status, est_pose_global):
     while not status:
         print(f"status {current_id}: ", status)
@@ -88,7 +88,7 @@ def driving_to_box(current_id, status, est_pose_global):
                 actions.backward_m(0.35)
                 sleep(1)
                 status = am_i_close(cam, current_id)                             
-            est_pose_global = est_pose
+            est_pose_global[0] = est_pose
             
         #Søg efter object
         print("Object in site2", actions.object_in_site(cam, current_id))
@@ -98,7 +98,7 @@ def driving_to_box(current_id, status, est_pose_global):
             print(scan_val)
             if scan_val == 0:
                 print("going in direction of box")
-                actions.going_in_direction_of_box(cam, current_id, est_pose_global, landmarks, safety_dist, time_cap = 5)   
+                actions.going_in_direction_of_box(cam, current_id, est_pose_global[0], landmarks, safety_dist, time_cap = 5)   
                 
         #Når den kan se objektet skal den følgende. 
 
