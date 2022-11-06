@@ -173,7 +173,7 @@ def drive_random():
     time_cap = 2.235 * ( float(final_dist*0.001))
     print("Hvor langt den bør køre: ", time_cap)
     start_time = time.perf_counter()
-    arlo.go_diff(40, 40, 1, 1)
+    arlo.go_diff(60, 60, 1, 1)
     print("Begynder at køre")
     while True:
         if (float(time.perf_counter()) - float(start_time)) > time_cap:
