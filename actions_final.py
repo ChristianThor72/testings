@@ -320,7 +320,8 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
     turn_degrees(theta, -1)
     sleep(3)
     while True:    
-        #Drive towards the next object even though we cant see it. 
+        #Drive towards the next object even though we cant see it.
+        print("Help, im blind!")
         drive_to_current_id(cam, time_cap, safety_dist, current_id)
         
         #Check if object has come into sight when time_cap is up. 
