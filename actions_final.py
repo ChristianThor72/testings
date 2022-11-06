@@ -313,7 +313,7 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
     #Turn towards the next object.
     print(pose)
     turn_towards_next_box(pose, current_id, landmarks)
-    
+    sleep(3)
     while True:    
         #Drive towards the next object even though we cant see it. 
         drive_to_current_id(cam, time_cap, safety_dist, current_id)
