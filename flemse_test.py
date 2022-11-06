@@ -77,7 +77,17 @@ def driving_to_box(current_id, status):
             print("DRIVING")
             #arlo.go_diff(70, 70, 1, 1)
             print("can see object!!!", current_id)
-            actions.drive_to_current_id(cam, time_cap, 350, current_id)                            
+            actions.drive_to_current_id(cam, time_cap, 350, current_id)
+            #Check if it is close to id
+            sleep(1)
+            actions.backward_m(0.7)
+            sleep(1)
+            status = am_i_close(cam, current_id)
+            if not status:
+                sleep(1)
+                actions.backward_m(0.35)
+                sleep(1)
+                status = am_i_close(cam, current_id)                             
 
         #Søg efter object
         print("Object in site2", actions.object_in_site(cam, current_id))
@@ -94,16 +104,7 @@ def driving_to_box(current_id, status):
         #Hvis den ikke kan se objektet, kør i retning af det ud fra pose. 
         
         
-        #Check if it is close to id
-        sleep(1)
-        actions.backward_m(0.7)
-        sleep(1)
-        status = am_i_close(cam, current_id)
-        if not status:
-            sleep(1)
-            actions.backward_m(0.35)
-            sleep(1)
-            status = am_i_close(cam, current_id)  
+ 
         
         if status:
             est_pose, particles, cam_dists = find_pose(particles, cam, current_id)
