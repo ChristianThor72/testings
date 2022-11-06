@@ -1,4 +1,4 @@
-e # -*- coding: utf-8 -*-
+
 """
 Created on Wed Nov  2 16:19:39 2022
 
@@ -29,7 +29,7 @@ dict, camera_matrix, dist_coeffs, markerLength = params()
 
 
 NUM_PARTICLES = 20000
-particles = sls.init_parts(NUM_PARTICLES)
+particles = sls.init_particles(NUM_PARTICLES)
 
 landmarkIDs = [1, 2, 3, 4]
 landmarks = {
@@ -57,7 +57,7 @@ finished = False
 def driving_to_box(current_id, status):
     while not status:
         print(f"status {current_id}: ", status)
-        particles = sls.init_parts(NUM_PARTICLES)
+        particles = sls.init_particles(NUM_PARTICLES)
         
         est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
         print("did pose")
