@@ -214,7 +214,6 @@ def find_pose(particles, cam, obj_ids):
     #print(ids)
     #cv2.aruco.drawDetectedMarkers(frameReference,corners)
 
-    corners, dist = cut_down_corners(corners, ids, obj_ids)
     
                         
     theta, x, y, parties = sls.self_locate(cam, frameReference, obj_ids, particles)  
