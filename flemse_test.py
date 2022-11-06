@@ -60,6 +60,7 @@ def driving_to_box(current_id, status):
         particles = sls.initialize_particles(NUM_PARTICLES)
         
         est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
+        print(est_pose)
         delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
         delta_y = landmarks[current_id][1]*10 - est_pose[1]*10
         dist_mm = np.sqrt((delta_x**2) + (delta_y**2))
