@@ -75,10 +75,11 @@ def driving_to_box(current_id, status):
             #Kører imod obejcted og tjekker hele tiden sensor
             print("DRIVING")
             #arlo.go_diff(70, 70, 1, 1)
-            print("can see object!!!")
+            print("can see object!!!", current_id)
             actions.drive_to_current_id(cam, time_cap, 350, current_id)                            
 
         #Søg efter object
+        print(actions.object_in_site(cam, current_id))
         if not actions.object_in_site(cam, current_id):
             print("cannot see object. Start scanning")
             scan_val = actions.scan_for_object(cam, dict, current_id)
