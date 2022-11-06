@@ -45,7 +45,7 @@ def turn_degrees(degrees, sign, leftSpeed = 60 , rightSpeed = 60): #it will spin
         spin_lw, spin_rw = 0 , 1
 
     start_time = time.perf_counter()
-    print(arlo.go_diff(leftSpeed, rightSpeed, spin_lw, spin_rw))
+    arlo.go_diff(leftSpeed, rightSpeed, spin_lw, spin_rw)
     while True:
         if (time.perf_counter() - start_time > 0.675*scalar):
             print(arlo.stop())
