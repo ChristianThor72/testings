@@ -55,6 +55,7 @@ finished = False
 
 est_pose_global = [0]
 def driving_to_box(current_id, status, est_pose_global):
+    backing_counter = 0
     while not status:
         print(f"status {current_id}: ", status)
         particles = sls.initialize_particles(NUM_PARTICLES)
@@ -83,6 +84,12 @@ def driving_to_box(current_id, status, est_pose_global):
             actions.backward_m(0.7)
             sleep(1)
             status = am_i_close(cam, current_id)
+
+            backing_counter += 1
+            if backing_counter >= 3:
+                actions.correct_front(cam, current_id)
+                backing_counter = 0
+                
             if not status:
                 sleep(1)
                 actions.backward_m(0.35)

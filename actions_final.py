@@ -390,7 +390,15 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
         break        
         
 
-    
+def correct_front(cam, current_id):
+    turn_degrees(35, -1)
+    sleep(1)
+    forward_m(0.5, 40, 40)
+    sleep(1)
+    turn_degrees(35, 1)     
+    sleep(2)
+    correct_angle(cam, current_id)
+    sleep(0.5)
     
 
 
