@@ -18,8 +18,8 @@ from timeit import default_timer as timer
 import sys
 from camera import Camera
 from time import sleep
-
 num_particles = 20000
+
 # Flags
 showGUI = False  # Whether or not to open GUI windows
 onRobot = True # Whether or not we are running on the Arlo robot
@@ -239,7 +239,7 @@ def self_locate(cam, frameReference, current_id, init_poses = []):
                         theta_corr = 2*np.pi - theta_corr 
                     
                     #print(elm.getTheta(), box_theta)
-                    delta_theta =  elm.getTheta() - theta_corr 
+                    delta_theta =  elm[3] - theta_corr 
     
     
                     potens_theta = ((pow( (delta_theta), 2 ))/(2 * (pow(sigma_theta, 2))))
