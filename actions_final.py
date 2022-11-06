@@ -200,7 +200,7 @@ def cut_down_corners(corners, ids, obj_ids):
         dist = dists[index]
         return corners, dist
     else:
-        return None, 1e10    
+        return [], 1e10    
     
 def find_pose(particles, cam, obj_ids):
     pose = None
