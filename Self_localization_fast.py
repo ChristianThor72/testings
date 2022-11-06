@@ -57,7 +57,7 @@ landmarks = {
     3: (400.0, 0.0),
     4: (400.0, 0.0) 
 }
-landmark_colors = [CRED, CGREEN] # Colors used when drawing the landmarks
+
 
 
 
@@ -295,7 +295,7 @@ def self_locate(cam, frameReference, current_id, init_poses = []):
         
             
 
-        return est_poses[2],est_poses[0], est_poses[1]
+        return est_poses[2],est_poses[0], est_poses[1], particles
         
     
         #est_pose.getTheta(), est_pose.getX(), est_pose.getY(), particles
