@@ -10,8 +10,8 @@ from traceback import print_tb
 import numpy as np
 
 import cv2
-import actions_final as actions
-from actions_final import find_pose, am_i_close
+import actions_fas as actions
+from actions_fas import find_pose, am_i_close
 import robot
 import particle
 import Self_localization_fast as sls
