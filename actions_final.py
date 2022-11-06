@@ -336,7 +336,7 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
     while True:    
         #Drive towards the next object even though we cant see it.
         print("Help, im blind!")
-        drive_to_current_id(cam, 0.5, safety_dist, current_id)
+        drive_to_current_id(cam, 1.0, safety_dist, current_id)
         
         #Check if object has come into sight when time_cap is up. 
         if object_in_site(cam, current_id):
