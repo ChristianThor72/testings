@@ -301,7 +301,7 @@ def turn_towards_next_box(pose, current_id, landmarks):
     if current_id == 4:
         theta_corr = theta_corr - (np.pi * 1.5)
     if current_id == 1:
-        theta_corr =  theta_corr - np.pi
+        theta_corr =  theta_corr - (165/180) * np.pi
         
         
     theta_new = (theta0+theta_corr)*180/np.pi
