@@ -18,8 +18,6 @@ from timeit import default_timer as timer
 import sys
 from camera import Camera
 from time import sleep
-import random_numbers as rn
-
 num_particles = 20000
 
 # Flags
@@ -94,7 +92,7 @@ def add_uncertainty(particles_list, sigma, sigma_theta):
     for particle in particles_list:
         particle[0] += rn.randn(0.0,sigma)
         particle[1] += rn.randn(0.0,sigma)
-        particle[2] = np.mod(particle.theta + rn.randn(0.0, sigma_theta), 2.0 * np.pi) 
+        particle[2] = np.mod(particle[2] + rn.randn(0.0, sigma_theta), 2.0 * np.pi) 
 
 
 
