@@ -288,7 +288,7 @@ def turn_towards_next_box(pose, current_id, landmarks):
     theta_corr = np.arccos(delta_x/dist_from_particle_to_box) 
     if delta_y < 0:
         theta_corr = 2*np.pi - theta_corr
-    theta_new = (theta0-theta_corr)*180/np.pi
+    theta_new = (theta0+theta_corr)*180/np.pi
     print("Theta pose: ", theta0*180/np.pi )
     print("Theta correction: ", theta_corr)
     print("Theta", theta_new)
