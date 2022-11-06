@@ -17,12 +17,12 @@ arlo = robot.Robot()
 sleep(1)
 
 
-def backward_m(m, leftSpeed = 69, rightSpeed = 70):
+def backward_m(m, leftSpeed = 70, rightSpeed = 70):
     start_time = time.perf_counter()
-    print(arlo.go_diff(leftSpeed, rightSpeed, 0, 0))
+    arlo.go_diff(leftSpeed, rightSpeed, 0, 0)
     while True:
         if ((float(time.perf_counter()) - float(start_time)) > 2.235 * float(m) - 2.235 * 0.15 ):
-            print(arlo.stop())
+            arlo.stop()
             break  
 
 def forward_m(m, leftSpeed = 70, rightSpeed = 70):
@@ -30,7 +30,7 @@ def forward_m(m, leftSpeed = 70, rightSpeed = 70):
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
     while True:
         if ((float(time.perf_counter()) - float(start_time)) > 2.235 * float(m) - 2.235 * 0.15 ):
-            print(arlo.stop())
+            arlo.stop()
             break  
 
 def forward_mm(m, leftSpeed = 70, rightSpeed = 70):
@@ -48,7 +48,7 @@ def turn_degrees(degrees, sign, leftSpeed = 60 , rightSpeed = 60): #it will spin
     arlo.go_diff(leftSpeed, rightSpeed, spin_lw, spin_rw)
     while True:
         if (time.perf_counter() - start_time > 0.675*scalar):
-            print(arlo.stop())
+            arlo.stop()
             break
 
 
@@ -216,7 +216,7 @@ def find_pose(particles, cam, obj_ids):
         scan_succes = -1
         #if no box is found or the same box is found
         if not corners_temp or obj_ids not in ids:  
-            print("cannot see object")
+            print("cannot see object, (find pose)")
             while scan_succes == -1:
                 scan_succes = scan_for_object(cam, dict, obj_ids)
                 return ([55., -0.6, 3.0]), particles, 0
