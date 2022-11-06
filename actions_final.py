@@ -101,6 +101,7 @@ def scan_for_object(cam, dict, obj_ids):
             break
         elif i == 29:
             return 0
+            break
         arlo.stop()
         
 def get_corners_ids(obj_ids, corners, ids):
