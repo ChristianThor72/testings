@@ -17,23 +17,23 @@ arlo = robot.Robot()
 sleep(1)
 
 
-def backward_m(m, leftSpeed = 70, rightSpeed = 70):
+def backward_m(m, leftSpeed = 69, rightSpeed = 70):
     start_time = time.perf_counter()
-    arlo.go_diff(leftSpeed, rightSpeed, 0, 0)
+    print(arlo.go_diff(leftSpeed, rightSpeed, 0, 0))
     while True:
         if ((float(time.perf_counter()) - float(start_time)) > 2.235 * float(m) - 2.235 * 0.15 ):
-            arlo.stop()
+            print(arlo.stop())
             break  
 
-def forward_m(m, leftSpeed = 70, rightSpeed = 70):
+def forward_m(m, leftSpeed = 69, rightSpeed = 70):
     start_time = time.perf_counter()
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
     while True:
         if ((float(time.perf_counter()) - float(start_time)) > 2.235 * float(m) - 2.235 * 0.15 ):
-            arlo.stop()
+            print(arlo.stop())
             break  
 
-def forward_mm(m, leftSpeed = 70, rightSpeed = 70):
+def forward_mm(m, leftSpeed = 69, rightSpeed = 70):
     forward_m(m*0.001)
 
 
@@ -45,10 +45,10 @@ def turn_degrees(degrees, sign, leftSpeed = 60 , rightSpeed = 60): #it will spin
         spin_lw, spin_rw = 0 , 1
 
     start_time = time.perf_counter()
-    arlo.go_diff(leftSpeed, rightSpeed, spin_lw, spin_rw)
+    print(arlo.go_diff(leftSpeed, rightSpeed, spin_lw, spin_rw))
     while True:
         if (time.perf_counter() - start_time > 0.675*scalar):
-            arlo.stop()
+            print(arlo.stop())
             break
 
 
@@ -203,54 +203,26 @@ def cut_down_corners(corners, ids, obj_ids):
         return None, 1e10    
     
 def find_pose(particles, cam, obj_ids):
+    pose = None
+    found_id = False
 
-    while True:
-        pose = None
-        found_id = False
-        #get corners and ids 
-        frameReference = cam.get_next_frame()
-        corners_temp, ids, _ = cv2.aruco.detectMarkers(frameReference, dict)
-        corners, _ = cut_down_corners(corners_temp, ids, obj_ids)
-        #print(ids)
-        #cv2.aruco.drawDetectedMarkers(frameReference,corners)
-        scan_succes = -1
-        #if no box is found or the same box is found
-        if not corners_temp or obj_ids not in ids:  
-            print("cannot see object, (find pose)")
-            while scan_succes == -1:
-                scan_succes = scan_for_object(cam, dict, obj_ids)
-                return ([55., -0.6, 3.0]), particles, 0
-                break
-            print(scan_succes)
-                
+    #get corners and ids 
+    frameReference = cam.get_next_frame()
+    corners_temp, ids, _ = cv2.aruco.detectMarkers(frameReference, dict)
+    corners, cam_dist = cut_down_corners(corners_temp, ids, obj_ids)
     
-            if scan_succes == 0: #0 is fail
-                sleep(2)
-                return pose, particles, 0
-                break
-                   
-            
-        elif corners_temp and obj_ids in ids:
-            if scan_succes ==-1:
-                
-                temp_corners = []
-                dists = []
-                for i in range(len(ids)):
-                    if ids[i] == obj_ids:
-                            temp_corners.append(corners_temp[i])
-                            dist, _, _ = detector(corners_temp[i], markerLength, camera_matrix, dist_coeffs)
-                            dists.append(dist)
-                
-                dists = np.array(dists)
-                print("DISTANCER: ", dists)
-                index = np.argmin(dists)
-                corners = temp_corners[index]
-                         
-            theta, x, y, parties = sls.self_locate(cam, frameReference, obj_ids, particles)  
-            particles = parties
-            pose = [x, y, theta]
-            return pose, particles, dists[index]
-        
+    #print(ids)
+    #cv2.aruco.drawDetectedMarkers(frameReference,corners)
+
+    corners, dist = cut_down_corners(corners, ids, obj_ids)
+    
+                        
+    theta, x, y, parties = sls.self_locate(cam, frameReference, obj_ids, particles)  
+    particles = parties
+    pose = [x, y, theta]
+
+    return pose, particles, cam_dist
+    
         
 
 
@@ -348,6 +320,7 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
         #Check if object has come into sight when time_cap is up. 
         if object_in_site(cam, current_id):
             break
+
     
     
 

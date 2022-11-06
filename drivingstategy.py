@@ -44,6 +44,8 @@ status4 = False
 status5 = False
 finished = False
 
+
+
 def driving_to_box(current_id, status):
    while not status:
       print(f"status {current_id}: ", status)
@@ -92,6 +94,7 @@ def driving_to_box(current_id, status):
          visited_landmarks.append(current_id)
 
 
+est_pose = [0,0,0]
 
 driving_to_box(1,status1)
 

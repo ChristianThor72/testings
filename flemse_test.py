@@ -58,24 +58,26 @@ def driving_to_box(current_id, status):
     while not status:
         print(f"status {current_id}: ", status)
         particles = sls.initialize_particles(NUM_PARTICLES)
-        
-        est_pose, particles, dist_cam = find_pose(particles, cam, current_id)
-        print(est_pose)
-        delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
-        delta_y = landmarks[current_id][1]*10 - est_pose[1]*10
-        dist_mm = np.sqrt((delta_x**2) + (delta_y**2))
-        theta = 0 #vi forventer at vi kigger op kassen
-        #actions.drive_to_object(dist, 0, 1)
-        safety_dist = 0.35
-        final_dist = max(dist_mm, dist_cam)
-        
-        time_cap = 2.235 * ( float(final_dist*0.001) - safety_dist)
-        print("Dette er distancen: ", final_dist)
-        
-        #Kører imod obejcted og tjekker hele tiden sensor
-        print("DRIVING")
-        #arlo.go_diff(70, 70, 1, 1)
-        
+        safety_dist = 0.35        
+        if actions.object_in_site(cam, current_id):
+            est_pose, particles, cam_dist = find_pose(particles, cam, current_id)
+            print(est_pose)
+            delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
+            delta_y = landmarks[current_id][1]*10 - est_pose[1]*10
+            dist_mm = np.sqrt((delta_x**2) + (delta_y**2))
+            theta = 0 #vi forventer at vi kigger op kassen
+            #actions.drive_to_object(dist, 0, 1)
+            final_dist = max(dist_mm, cam_dist)
+            
+            time_cap = 2.235 * ( float(final_dist*0.001) - safety_dist)
+            print("Dette er distancen: ", final_dist)
+            
+            #Kører imod obejcted og tjekker hele tiden sensor
+            print("DRIVING")
+            #arlo.go_diff(70, 70, 1, 1)
+            print("can see object!!!")
+            actions.drive_to_current_id(cam, time_cap, 350, current_id)                            
+
         #Søg efter object
         if not actions.object_in_site(cam, current_id):
             print("cannot see object. Start scanning")
@@ -86,9 +88,7 @@ def driving_to_box(current_id, status):
                 actions.going_in_direction_of_box(cam, current_id, est_pose, landmarks, safety_dist, time_cap = 5)   
                 
         #Når den kan se objektet skal den følgende. 
-        elif actions.object_in_site(cam, current_id):
-            print("can see object!!!")
-            actions.drive_to_current_id(cam, time_cap, 350, current_id)
+
         #Hvis den ikke kan se objektet, kør i retning af det ud fra pose. 
         
         
