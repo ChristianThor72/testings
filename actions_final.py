@@ -326,6 +326,7 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
         
         #Check if object has come into sight when time_cap is up. 
         if object_in_site(cam, current_id):
+            print("Im not blind, just stupid")
             arlo.stop()
             break
 
