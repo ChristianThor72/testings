@@ -58,7 +58,8 @@ def driving_to_box(current_id, status):
     while not status:
         print(f"status {current_id}: ", status)
         particles = sls.initialize_particles(NUM_PARTICLES)
-        safety_dist = 0.35        
+        safety_dist = 0.35    
+        print("Object in site", actions.object_in_site(cam, current_id))
         if actions.object_in_site(cam, current_id):
             est_pose, particles, cam_dist = find_pose(particles, cam, current_id)
             print(est_pose)
@@ -79,7 +80,7 @@ def driving_to_box(current_id, status):
             actions.drive_to_current_id(cam, time_cap, 350, current_id)                            
 
         #Søg efter object
-        print(actions.object_in_site(cam, current_id))
+        print("Object in site2", actions.object_in_site(cam, current_id))
         if not actions.object_in_site(cam, current_id):
             print("cannot see object. Start scanning")
             scan_val = actions.scan_for_object(cam, dict, current_id)
