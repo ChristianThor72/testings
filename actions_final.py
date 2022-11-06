@@ -167,13 +167,13 @@ def panic_mode(safety_dist):
 def drive_random():
 
     safety_dist = 100
-    turn_degrees(random.randint(0, 360),1)
+    turn_degrees(random.randint(90, 270),1)
     sleep(1)
-    final_dist = random.randint(750,2000)
+    final_dist = random.randint(600,850)
     time_cap = 2.235 * ( float(final_dist*0.001))
     print("Hvor langt den bør køre: ", time_cap)
     start_time = time.perf_counter()
-    arlo.go_diff(69, 70, 1, 1)
+    arlo.go_diff(40, 40, 1, 1)
     print("Begynder at køre")
     while True:
         if (float(time.perf_counter()) - float(start_time)) > time_cap:

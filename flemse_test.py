@@ -104,11 +104,15 @@ def driving_to_box(current_id, status, est_pose_global):
             scan_val = actions.scan_for_object(cam, dict, current_id)
             print("Scan Value: ", scan_val)
             if scan_val == 0:
-                print("going in direction of box")
-                actions.going_in_direction_of_box(cam, current_id, 
-                                                  est_pose_global[0], 
-                                                  landmarks, safety_dist, 
-                                                  time_cap = 4)   
+                if current_id != 2:
+                    print("going in direction of box")
+                    actions.going_in_direction_of_box(cam, current_id, 
+                                                      est_pose_global[0], 
+                                                      landmarks, safety_dist, 
+                                                      time_cap = 4)  
+                else:
+                    actions.drive_random()
+                
                 
         #Når den kan se objektet skal den følgende. 
 
