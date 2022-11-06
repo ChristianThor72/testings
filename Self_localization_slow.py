@@ -198,7 +198,7 @@ def self_locate(cam, frameReference, current_id, init_poses = []):
             cam = camera.Camera(0, 'macbookpro', useCaptureThread = True)
         """
         count = 0 
-        while count < 3:
+        while count < 1:
             # Move the robot according to user input (only for testing)
             action = cv2.waitKey(10)
             if action == ord('q'): # Quit
