@@ -247,8 +247,8 @@ def correct_angle(cam, obj_ids):
         sleep(0.5)
 
 def drive_to_current_id(cam, time_cap, safety_dist, current_id):
+    start_time = time.perf_counter()
     while True:
-        start_time = time.perf_counter()
         arlo.go_diff(69, 70, 1, 1)
         if (float(time.perf_counter()) - float(start_time)) > time_cap:
             arlo.stop()
@@ -322,7 +322,7 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
     while True:    
         #Drive towards the next object even though we cant see it.
         print("Help, im blind!")
-        drive_to_current_id(cam, time_cap, safety_dist, current_id)
+        drive_to_current_id(cam, 0.5, safety_dist, current_id)
         
         #Check if object has come into sight when time_cap is up. 
         if object_in_site(cam, current_id):
