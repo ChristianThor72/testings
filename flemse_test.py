@@ -54,8 +54,7 @@ finished = False
 
 
 est_pose_global = []
-def driving_to_box(current_id, status, est_pose_global = est_pose_global):
-    print("global pose", est_pose_global)
+def driving_to_box(current_id, status, est_pose_global):
     while not status:
         print(f"status {current_id}: ", status)
         particles = sls.initialize_particles(NUM_PARTICLES)
@@ -114,16 +113,16 @@ def driving_to_box(current_id, status, est_pose_global = est_pose_global):
  
 
 
-            
-driving_to_box(1,status1)
-
-driving_to_box(2,status2)
-
-driving_to_box(3,status3)
-
-driving_to_box(4,status4)
-
-driving_to_box(1,status5)
+print("global pose1", est_pose_global)           
+driving_to_box(1,status1, est_pose_global)
+print("global pose2", est_pose_global)
+driving_to_box(2,status2, est_pose_global)
+print("global pose3", est_pose_global)
+driving_to_box(3,status3, est_pose_global)
+print("global pose4", est_pose_global)
+driving_to_box(4,status4, est_pose_global)
+print("global pose5", est_pose_global)
+driving_to_box(1,status5, est_pose_global)
 
 print("FINITO")
 
