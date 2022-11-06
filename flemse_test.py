@@ -54,7 +54,7 @@ finished = False
 
 
 est_pose_global = []
-def driving_to_box(current_id, status):
+def driving_to_box(current_id, status, est_pose_global = est_pose_global):
     while not status:
         print(f"status {current_id}: ", status)
         particles = sls.initialize_particles(NUM_PARTICLES)
