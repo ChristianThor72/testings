@@ -231,7 +231,6 @@ def find_pose(particles, cam, obj_ids):
                    
             
         elif corners_temp and obj_ids in ids:
-            print("can see object")
             if scan_succes ==-1:
                 
                 temp_corners = []
