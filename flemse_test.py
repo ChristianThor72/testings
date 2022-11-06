@@ -62,7 +62,7 @@ def driving_to_box(current_id, status, est_pose_global):
         print("Object in site", actions.object_in_site(cam, current_id))
         if actions.object_in_site(cam, current_id):
             est_pose, particles, cam_dist = find_pose(particles, cam, current_id)
-            print(est_pose)
+            print("pose lokal", est_pose)
             delta_x = landmarks[current_id][0]*10 - est_pose[0]*10
             delta_y = landmarks[current_id][1]*10 - est_pose[1]*10
             dist_mm = np.sqrt((delta_x**2) + (delta_y**2))
