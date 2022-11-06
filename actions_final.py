@@ -302,7 +302,7 @@ def turn_towards_next_box(pose, current_id, landmarks):
         if delta_y < 0:
             theta_corr =  theta_corr - 2*np.pi
     if current_id == 4:
-        theta_corr = theta_corr + np.pi * 0.5
+        theta_corr = theta_corr + np.pi * 0.5 - ((10 / 180) * np.pi)
     if current_id == 1:
         theta_corr =  theta_corr - (165/180) * np.pi
         
@@ -326,7 +326,51 @@ def object_in_site(cam, current_id):
     else:
         return False
 
+def drive_to_current_id_if_no_obj(cam, time_cap, safety_dist, current_id):
+    start_time = time.perf_counter()
+    while True:
+        arlo.go_diff(70, 70, 1, 1)
+        if (float(time.perf_counter()) - float(start_time)) > time_cap:
+            arlo.stop()
+            break
+        if arlo.read_left_ping_sensor() <= safety_dist:
+            print(arlo.read_left_ping_sensor())
+            turn_degrees(35, 1)
+            sleep(1)
+            forward_m(0.5, 40, 40)
+            sleep(1)
+            turn_degrees(35, -1)
+            sleep(2)
+            correct_angle(cam, current_id)
+            sleep(0.5)
+            time_cap += 6.0
+            print("Adding time")
+            
 
+        if arlo.read_right_ping_sensor() <= safety_dist:
+            print(arlo.read_right_ping_sensor())
+            turn_degrees(35, -1)
+            sleep(1)
+            forward_m(0.5, 40, 40)
+            sleep(1)
+            turn_degrees(35, 1)     
+            sleep(2)
+            correct_angle(cam, current_id)
+            sleep(0.5)
+            time_cap += 6.0
+            print("Adding time")
+            
+            
+        if arlo.read_front_ping_sensor() <= safety_dist+100:
+            arlo.stop()
+            break
+        
+        #Check if object has come into sight when time_cap is up. 
+        if object_in_site(cam, current_id):
+            print("Im not blind, just stupid")
+            arlo.stop()
+            break
+        
 #If we cant see the next box, assuming we have scanned for object. 
 def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, time_cap = 5):
     #Scan for object we just have seen as we want to face it again to be sure of our direction. 
@@ -341,13 +385,10 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
     while True:    
         #Drive towards the next object even though we cant see it.
         print("Help, im blind!")
-        drive_to_current_id(cam, 1.0, safety_dist, current_id)
+        drive_to_current_id_if_no_obj(cam, 0.5, safety_dist, current_id)
+        sleep(1)
+        break        
         
-        #Check if object has come into sight when time_cap is up. 
-        if object_in_site(cam, current_id):
-            print("Im not blind, just stupid")
-            arlo.stop()
-            break
 
     
     
