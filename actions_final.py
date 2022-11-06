@@ -17,7 +17,7 @@ arlo = robot.Robot()
 sleep(1)
 
 
-def backward_m(m, leftSpeed = 69, rightSpeed = 70):
+def backward_m(m, leftSpeed = 70, rightSpeed = 70):
     start_time = time.perf_counter()
     print(arlo.go_diff(leftSpeed, rightSpeed, 0, 0))
     while True:
@@ -25,7 +25,7 @@ def backward_m(m, leftSpeed = 69, rightSpeed = 70):
             print(arlo.stop())
             break  
 
-def forward_m(m, leftSpeed = 69, rightSpeed = 70):
+def forward_m(m, leftSpeed = 70, rightSpeed = 70):
     start_time = time.perf_counter()
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
     while True:
@@ -33,7 +33,7 @@ def forward_m(m, leftSpeed = 69, rightSpeed = 70):
             print(arlo.stop())
             break  
 
-def forward_mm(m, leftSpeed = 69, rightSpeed = 70):
+def forward_mm(m, leftSpeed = 70, rightSpeed = 70):
     forward_m(m*0.001)
 
 
@@ -295,9 +295,9 @@ def turn_towards_next_box(pose, current_id, landmarks):
 def object_in_site(cam, current_id):
     temp_frame = cam.get_next_frame()
     corners_temp, ids, _ = cv2.aruco.detectMarkers(temp_frame, dict)
-    print("cornerr_temp", corners_temp)
+    #print("cornerr_temp", corners_temp)
     corners, _ = cut_down_corners(corners_temp, ids, current_id)
-    print("corners", corners)
+    #print("corners", corners)
     if len(corners) > 0:
         return True
     else:
