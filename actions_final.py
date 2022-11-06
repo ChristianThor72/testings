@@ -294,8 +294,8 @@ def turn_towards_next_box(pose, current_id, landmarks):
 
 def object_in_site(cam, current_id):
     temp_frame = cam.get_next_frame()
-    corners, ids, _ = cv2.aruco.detectMarkers(temp_frame, dict)
-    corners, _ = cut_down_corners(corners, ids, current_id)
+    corners_temp, ids, _ = cv2.aruco.detectMarkers(temp_frame, dict)
+    corners, _ = cut_down_corners(corners_temp, ids, current_id)
     if corners:
         return True
     else:
