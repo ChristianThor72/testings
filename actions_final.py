@@ -298,7 +298,7 @@ def object_in_site(cam, current_id):
     print("cornerr_temp", corners_temp)
     corners, _ = cut_down_corners(corners_temp, ids, current_id)
     print("corners", corners)
-    if corners != None:
+    if len(corners) > 0:
         return True
     else:
         return False
