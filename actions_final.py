@@ -385,7 +385,7 @@ def going_in_direction_of_box(cam, current_id, pose, landmarks, safety_dist, tim
     while True:    
         #Drive towards the next object even though we cant see it.
         print("Help, im blind!")
-        drive_to_current_id_if_no_obj(cam, 5, safety_dist, current_id)
+        drive_to_current_id_if_no_obj(cam, 4, safety_dist, current_id)
         sleep(1)
         break        
         

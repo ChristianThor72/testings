@@ -108,7 +108,7 @@ def driving_to_box(current_id, status, est_pose_global):
                 actions.going_in_direction_of_box(cam, current_id, 
                                                   est_pose_global[0], 
                                                   landmarks, safety_dist, 
-                                                  time_cap = 5)   
+                                                  time_cap = 4)   
                 
         #Når den kan se objektet skal den følgende. 
 
