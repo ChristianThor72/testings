@@ -263,7 +263,7 @@ def drive_to_current_id(cam, time_cap, safety_dist, current_id):
             sleep(2)
             correct_angle(cam, current_id)
             sleep(0.5)
-            time_cap += 5.0
+            time_cap += 6.0
             print("Adding time")
             
 
@@ -277,7 +277,7 @@ def drive_to_current_id(cam, time_cap, safety_dist, current_id):
             sleep(2)
             correct_angle(cam, current_id)
             sleep(0.5)
-            time_cap += 5.0
+            time_cap += 6.0
             print("Adding time")
             
             
