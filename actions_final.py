@@ -55,17 +55,19 @@ def turn_degrees(degrees, sign, leftSpeed = 60 , rightSpeed = 60): #it will spin
 def detector(corners, markerLength, camera_matrix, dist_coeffs):
     ex = ([1,0,0])
     ez = ([0,0,1])
-    
-    rvec, tvec, _ = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, camera_matrix, dist_coeffs)
-    print(corners, tvec)
-    dist = np.linalg.norm(rvec-tvec)
-    tvec = tvec.reshape((3,))
-    dist = np.linalg.norm(tvec)
-    theta = np.arccos(np.dot((tvec/dist),ez))
-    signfunc = np.sign(np.dot(tvec,ex))
-    ang_deg = signfunc * np.rad2deg(theta)
-    
-    return dist, np.rad2deg(theta), signfunc
+    try:
+        rvec, tvec, _ = cv2.aruco.estimatePoseSingleMarkers(corners, markerLength, camera_matrix, dist_coeffs)
+        print(corners, tvec)
+        dist = np.linalg.norm(rvec-tvec)
+        tvec = tvec.reshape((3,))
+        dist = np.linalg.norm(tvec)
+        theta = np.arccos(np.dot((tvec/dist),ez))
+        signfunc = np.sign(np.dot(tvec,ex))
+        ang_deg = signfunc * np.rad2deg(theta)
+        
+        return dist, np.rad2deg(theta), signfunc
+    except:
+        return 700, 10, -1
 
 def drive_to_object(dist_mm, ang, sign):
     turn_degrees(ang, sign)
