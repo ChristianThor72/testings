@@ -17,7 +17,7 @@ arlo = robot.Robot()
 sleep(1)
 
 
-def backward_m(m, leftSpeed = 70, rightSpeed = 70):
+def backward_m(m, leftSpeed = 69, rightSpeed = 70):
     start_time = time.perf_counter()
     print(arlo.go_diff(leftSpeed, rightSpeed, 0, 0))
     while True:
@@ -25,7 +25,7 @@ def backward_m(m, leftSpeed = 70, rightSpeed = 70):
             print(arlo.stop())
             break  
 
-def forward_m(m, leftSpeed = 70, rightSpeed = 70):
+def forward_m(m, leftSpeed = 69, rightSpeed = 70):
     start_time = time.perf_counter()
     print(arlo.go_diff(leftSpeed, rightSpeed, 1, 1))
     while True:
@@ -33,7 +33,7 @@ def forward_m(m, leftSpeed = 70, rightSpeed = 70):
             print(arlo.stop())
             break  
 
-def forward_mm(m, leftSpeed = 70, rightSpeed = 70):
+def forward_mm(m, leftSpeed = 69, rightSpeed = 70):
     forward_m(m*0.001)
 
 
@@ -254,7 +254,7 @@ def correct_angle(cam, obj_ids):
 def drive_to_current_id(cam, time_cap, safety_dist, current_id):
     start_time = time.perf_counter()
     while True:
-        arlo.go_diff(70, 70, 1, 1)
+        arlo.go_diff(69, 70, 1, 1)
         if (float(time.perf_counter()) - float(start_time)) > time_cap:
             arlo.stop()
             break
@@ -331,7 +331,7 @@ def object_in_site(cam, current_id):
 def drive_to_current_id_if_no_obj(cam, time_cap, safety_dist, current_id):
     start_time = time.perf_counter()
     while True:
-        arlo.go_diff(70, 70, 1, 1)
+        arlo.go_diff(69, 70, 1, 1)
         if (float(time.perf_counter()) - float(start_time)) > time_cap:
             arlo.stop()
             break
